@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-historia-clinica"
+    }
+  },
+  "defaultProject": "angular-historia-clinica",
+  "cli": {
+    "analytics": false
+  }
 }
