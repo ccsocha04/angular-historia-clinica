@@ -8,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  recordPatient = JSON.parse(localStorage.getItem('recordPatient'));
+  
+  constructor( ) { }
 
   ngOnInit(): void {
+    
   }
-
+  
+   
 }

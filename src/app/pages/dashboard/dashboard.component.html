@@ -1,1 +1,181 @@
-<p>dashboard works!</p>
+<div class="container-fluid p-0">
+
+    <div class="row">
+
+        <!-- Datos paciente -->
+        <div class="col-md-4 col-xl-3">
+            <div class="card mb-3">
+                <div class="card-body text-center">
+                    <!-- <img src="../../../assets/img/avatars/avatar-2.jpg" alt="Pciente de Pruebas" class="img-fluid rounded-circle mb-2"
+                        width="128" height="128" /> -->
+                    <h5 class="card-title mb-0">
+                        <strong>{{ recordPatient.PrimerNombre }} {{ recordPatient.PrimerApellido }}</strong>
+                    </h5>
+                </div>
+                <hr class="my-0" />
+                <!-- Datos personales -->
+                <div class="card-body">
+                    <h5 class="h6 card-title">
+                        <strong>Datos personales</strong>
+                    </h5>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-1">
+                            <span data-feather="info" class="feather-sm me-1"></span>
+                             Tipo de documento: {{ recordPatient.TipoDocumento.ItemDescr }}
+                        </li>
+                        <li class="mb-1">
+                            <span data-feather="tablet" class="feather-sm me-1"></span>
+                            Documento: {{ recordPatient.Documento }}
+                        </li>
+                        <li class="mb-1">
+                            <span data-feather="calendar" class="feather-sm me-1"></span>
+                            Fecha de nacimiento: {{ recordPatient.FechaNacimiento }}
+                        </li>
+                        <li class="mb-1">
+                            <span data-feather="bookmark" class="feather-sm me-1"></span>
+                            Lugar de nacimiento: {{ recordPatient.LugarNacimiento.Provincia.Departamento.Nombre }}, {{ recordPatient.LugarNacimiento.Nombre }}
+                        </li>
+                        <li class="mb-1">
+                            <span data-feather="home" class="feather-sm me-1"></span>
+                            Edad: Edad
+                        </li>
+                        <li class="mb-1">
+                            <span data-feather="home" class="feather-sm me-1"></span>
+                            Estado cívil: {{ recordPatient.EstadoCivil.ItemDescr }}
+                        </li>
+                        <li class="mb-1">
+                            <span data-feather="home" class="feather-sm me-1"></span>
+                            Nacionalidad: {{ recordPatient.Nacionalidad.Nombre }}
+                        </li>
+                    </ul>
+                </div>
+                <hr class="my-0" />
+                <div class="card-body">
+                    <h5 class="h6 card-title">
+                        <strong>Entidad Administradora</strong>
+                    </h5>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-1">
+                            <span data-feather="info" class="feather-sm me-1"></span>
+                            Entidad: {{ recordPatient.EntidadAdministradora.Nombre }}
+                        </li>
+                        <li class="mb-1">
+                            <span data-feather="tablet" class="feather-sm me-1"></span>
+                            Tipo de regimén: {{ recordPatient.TipoRegimen.ItemDescr }}
+                        </li>
+                        <li class="mb-1">
+                            <span data-feather="calendar" class="feather-sm me-1"></span>
+                            Tipo de afiliación: {{ recordPatient.TipoAfiliacion.ItemDescr }}
+                        </li>
+                        <li class="mb-1">
+                            <span data-feather="bookmark" class="feather-sm me-1"></span>
+                            Tipo etnia: {{ recordPatient.TipoEtnia.ItemDescr }}
+                        </li>
+                        <li class="mb-1">
+                            <span data-feather="home" class="feather-sm me-1"></span>
+                            Población especial: {{ recordPatient.PoblacionEspecial.ItemDescr }}
+                        </li>
+                        <li class="mb-1">
+                            <span data-feather="home" class="feather-sm me-1"></span>
+                            Tipo de discapacidad: {{ recordPatient.TipoDiscapacidad.ItemDescr }}
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card-body">
+                    <h5 class="h6 card-title">Datos de contacto</h5>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-1"><span data-feather="user" class="feather-sm me-1"></span>
+                            Contacto de prueba</li>
+                        <li class="mb-1"><span data-feather="info" class="feather-sm me-1"></span>
+                            Cédula de ciudadania</li>
+                        <li class="mb-1"><span data-feather="tablet" class="feather-sm me-1"></span> 999
+                        </li>
+                        <li class="mb-1"><span data-feather="calendar" class="feather-sm me-1"></span>
+                            42 años</li>
+                        <li class="mb-1"><span data-feather="home" class="feather-sm me-1"></span>
+                            Villeta, Cundinamarca</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Área de servicio -->
+        <div class="col-md-4 col-xl-4">
+            <div class="row">
+                <div class="col-md-12 col-xl-12">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Área de servicio</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart">
+                                <canvas id="chartjs-polar-area"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-xl-6">
+                    <a href="diagnosis.html">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title mb-2">Diagnósticos</h5>
+                                <h1 class="mt-1 mb-0">29</h1>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6 col-xl-6">
+                    <a href="background.html">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title mb-2">Antecendentes</h5>
+                                <h1 class="mt-1 mb-0">15</h1>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-xl-6">
+                    <a href="orders.html">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title mb-2">Ordenes</h5>
+                                <h1 class="mt-1 mb-0">10</h1>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6 col-xl-6">
+                    <a href="management.html">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title mb-2">Plan de manejo</h5>
+                                <h1 class="mt-1 mb-0">32</h1>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actividad reciente -->
+        <div class="col-md-4 col-xl-5">
+            <div class="card flex-fill w-100">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Actividad reciente</h5>
+                </div>
+                <div class="card-body py-3">
+                    <div class="chart chart-sm">
+                        <canvas id="chartjs-dashboard-line"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
