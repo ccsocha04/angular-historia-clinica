@@ -50,14 +50,15 @@
                     </ul>
                 </div>
                 <hr class="my-0" />
+                <!-- Entidad administradora -->
                 <div class="card-body">
                     <h5 class="h6 card-title">
-                        <strong>Entidad Administradora</strong>
+                        <strong>Entidad administradora</strong>
                     </h5>
                     <ul class="list-unstyled mb-0">
                         <li class="mb-1">
                             <span data-feather="info" class="feather-sm me-1"></span>
-                            Entidad: {{ recordPatient.EntidadAdministradora.Nombre }}
+                            EPS: {{ recordPatient.EntidadAdministradora.Nombre }}
                         </li>
                         <li class="mb-1">
                             <span data-feather="tablet" class="feather-sm me-1"></span>
@@ -81,7 +82,8 @@
                         </li>
                     </ul>
                 </div>
-
+                <hr class="my-0" />
+                <!-- Datos de contacto -->
                 <div class="card-body">
                     <h5 class="h6 card-title">Datos de contacto</h5>
                     <ul class="list-unstyled mb-0">
@@ -121,8 +123,12 @@
                     <a href="diagnosis.html">
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title mb-2">Diagnósticos</h5>
-                                <h1 class="mt-1 mb-0">29</h1>
+                                <h5 class="card-title mb-2">
+                                    Diagnósticos
+                                </h5>
+                                <h1 class="mt-1 mb-0">
+                                    {{ recordPatient.Diagnosticos.length }}
+                                </h1>
                             </div>
                         </div>
                     </a>
@@ -131,8 +137,12 @@
                     <a href="background.html">
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title mb-2">Antecendentes</h5>
-                                <h1 class="mt-1 mb-0">15</h1>
+                                <h5 class="card-title mb-2">
+                                    Antecendentes
+                                </h5>
+                                <h1 class="mt-1 mb-0">
+                                    {{ recordPatient.Antecedentes.length }}
+                                </h1>
                             </div>
                         </div>
                     </a>
@@ -143,8 +153,12 @@
                     <a href="orders.html">
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title mb-2">Ordenes</h5>
-                                <h1 class="mt-1 mb-0">10</h1>
+                                <h5 class="card-title mb-2">
+                                    Ordenes
+                                </h5>
+                                <h1 class="mt-1 mb-0">
+                                    {{ recordPatient.ServiciosIPS.length }}
+                                </h1>
                             </div>
                         </div>
                     </a>
@@ -153,8 +167,12 @@
                     <a href="management.html">
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title mb-2">Plan de manejo</h5>
-                                <h1 class="mt-1 mb-0">32</h1>
+                                <h5 class="card-title mb-2">
+                                    Plan de manejo
+                                </h5>
+                                <h1 class="mt-1 mb-0">
+                                    {{ recordPatient.PlanManejo.length }}
+                                </h1>
                             </div>
                         </div>
                     </a>

@@ -2,124 +2,33 @@
 
     <div class="row">
 
-        <!-- Datos paciente -->
-        <!-- <div class="col-md-4 col-xl-3">
-            <div class="card mb-3">
-                <div class="card-body text-center">
-                    <img src="img/avatars/avatar-2.jpg" alt="Pciente de Pruebas" class="img-fluid rounded-circle mb-2"
-                        width="128" height="128" />
-                    <h5 class="card-title mb-0">PACIENTE DE PRUEBA</h5>
-                </div>
-                <hr class="my-0" />
-                <div class="card-body">
-                    <h5 class="h6 card-title">Datos del paciente</h5>
-                    <ul class="list-unstyled mb-0">
-                        <li class="mb-1"><span data-feather="info" class="feather-sm me-1"></span>
-                            Cédula de ciudadania</li>
-                        <li class="mb-1"><span data-feather="tablet" class="feather-sm me-1"></span> 777
-                        </li>
-                        <li class="mb-1"><span data-feather="calendar" class="feather-sm me-1"></span>
-                            24 años</li>
-                        <li class="mb-1"><span data-feather="bookmark" class="feather-sm me-1"></span>
-                            EPS Sánitas S.A.</li>
-                        <li class="mb-1"><span data-feather="home" class="feather-sm me-1"></span>
-                            Villeta, Cundinamarca</li>
-                    </ul>
-                </div>
-                <hr class="my-0" />
-                <div class="card-body">
-                    <h5 class="h6 card-title">Datos de contacto</h5>
-                    <ul class="list-unstyled mb-0">
-                        <li class="mb-1"><span data-feather="user" class="feather-sm me-1"></span>
-                            Contacto de prueba</li>
-                        <li class="mb-1"><span data-feather="info" class="feather-sm me-1"></span>
-                            Cédula de ciudadania</li>
-                        <li class="mb-1"><span data-feather="tablet" class="feather-sm me-1"></span> 999
-                        </li>
-                        <li class="mb-1"><span data-feather="calendar" class="feather-sm me-1"></span>
-                            42 años</li>
-                        <li class="mb-1"><span data-feather="home" class="feather-sm me-1"></span>
-                            Villeta, Cundinamarca</li>
-                    </ul>
-                </div>
-            </div>
-        </div> -->
-
-        <div class="col-md-8 col-xl-9">
+        <div class="col-md-12 col-xl-12">
             <div class="card flex-fill">
                 <table class="table table-hover my-0">
                     <thead>
                         <tr>
-                            <th>CÓDIGO</th>
-                            <th>NOMBRE</th>
-                            <th>TIPO DE DIAGNÓSTICO</th>
-                            <th>HOSPITAL</th>
-                            <th class="d-none d-xl-table-cell text-nowrap">FECHA</th>
+                            <th rowspan="2" >CÓDIGO</th>
+                            <th rowspan="2" class="d-none d-xl-table-cell text-nowrap">FECHA</th>
+                            <th rowspan="2">NOMBRE</th>
+                            <th rowspan="2">HOSPITAL</th>
+                            <th colspan="3">DIAGNÓSTICO</th>
+                        </tr>
+                        <tr>
+                            <th>PRINCIPAL</th>
+                            <th>INGRESO</th>
+                            <th>EGRESO</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>R104</td>
-                            <td>OTROS DOLORES ABDOMINALES Y LOS NO ESPECIFICADOS</td>
-                            <td></td>
-                            <td>HOSPITAL SAN RAFAEL - FACATATIVA</td>
-                            <td class="d-none d-xl-table-cell text-nowrap">2014-09-12</td>
-                        </tr>
-                        <tr>
-                            <td>K566</td>
-                            <td>OTRAS OBSTRUCCIONES INTESTINALES Y LAS NO ESPECIFICADAS</td>
-                            <td></td>
-                            <td>HOSPITAL SAN RAFAEL - FACATATIVA</td>
-                            <td class="d-none d-xl-table-cell text-nowrap">2014-09-12</td>
-                        </tr>
-                        <tr>
-                            <td>R104</td>
-                            <td>OTROS DOLORES ABDOMINALES Y LOS NO ESPECIFICADOS</td>
-                            <td></td>
-                            <td>HOSPITAL MARIO GAITAN YANGUAS - SOACHA</td>
-                            <td class="d-none d-xl-table-cell text-nowrap">2014-09-12</td>
-                        </tr>
-                        <tr>
-                            <td>J039</td>
-                            <td>AMIGDALITIS AGUDA, NO ESPECIFICADA</td>
-                            <td></td>
-                            <td>HOSPITAL MARIO GAITAN YANGUAS - SOACHA</td>
-                            <td class="d-none d-xl-table-cell text-nowrap">2014-09-13</td>
-                        </tr>
-                        <tr>
-                            <td>J039</td>
-                            <td>AMIGDALITIS AGUDA, NO ESPECIFICADA</td>
-                            <td></td>
-                            <td>HOSPITAL MARIO GAITAN YANGUAS - SOACHA</td>
-                            <td class="d-none d-xl-table-cell text-nowrap">2014-09-13</td>
-                        </tr>
-                        <tr>
-                            <td>J209</td>
-                            <td>BRONQUITIS AGUDA, NO ESPECIFICADA</td>
-                            <td></td>
-                            <td>HOSPITAL SAN ANTONIO - CHÍA</td>
-                            <td class="d-none d-xl-table-cell text-nowrap">2014-09-13</td>
-                        </tr>
-                        <tr>
-                            <td>J209</td>
-                            <td>BRONQUITIS AGUDA, NO ESPECIFICADA</td>
-                            <td></td>
-                            <td>HOSPITAL SAN ANTONIO - CHÍA</td>
-                            <td class="d-none d-xl-table-cell text-nowrap">2014-09-13</td>
-                        </tr>
-                        <tr>
-                            <td>A051</td>
-                            <td>BOTULISMO</td>
-                            <td></td>
-                            <td>HOSPITAL SAN ANTONIO - CHÍA</td>
-                            <td class="d-none d-xl-table-cell text-nowrap">2014-10-15</td>
-                        </tr>
-                        <tr>
-                            <td>A051</td>
-                            <td>BOTULISMO</td>
-                            <td></td>
-                            <td>HOSPITAL SAN ANTONIO - CHÍA</td>
-                            <td class="d-none d-xl-table-cell text-nowrap">2014-10-15</td>
+                        
+                        <tr *ngFor="let diagnosis of recordPatient.Diagnosticos">
+                            <td><strong>{{ diagnosis.Diagnostico.Codigo }}</strong></td>
+                            <td class="d-none d-xl-table-cell text-nowrap">{{ diagnosis.FolioAtencion.FechaAtencion }}</td>
+                            <td>{{ diagnosis.Diagnostico.Nombre }}</td>
+                            <td>{{ diagnosis.FolioAtencion.IPS.Nombre }}</td>
+                            <td>{{ diagnosis.DiagnosticoPrincipal }}</td>
+                            <td>{{ diagnosis.DiagnosticoIngreso }}</td>
+                            <td>{{ diagnosis.DiagnosticoEgreso }}</td>
                         </tr>
 
                     </tbody>

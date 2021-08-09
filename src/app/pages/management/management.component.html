@@ -1,1 +1,39 @@
-<p>management works!</p>
+<div class="container-fluid p-0">
+
+    <div class="row">
+
+        <div class="col-md-12 col-xl-12">
+            <div class="card flex-fill">
+                <table class="table table-hover my-0">
+                    <thead>
+                        <tr>
+                            <th class="d-none d-xl-table-cell text-nowrap">CÓDIGO</th>
+                            <th class="d-none d-xl-table-cell text-nowrap">FECHA</th>
+                            <th>NOMBRE</th>
+                            <th>CANTIDAD</th>
+                            <th>TIPO</th>
+                            <!-- <th>HOSPITAL</th> -->
+                            <th>OBSERVACIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let management of recordPatient.PlanManejo">
+
+                            <td class="d-none d-xl-table-cell text-nowrap">{{ management.Medicamento.Codigo }}</td>
+                            <td class="d-none d-xl-table-cell text-nowrap">{{ management.FolioAtencion.FechaAtencion }}</td>
+                            <td>{{ management.Medicamento.Nombre }}</td>
+                            <td>{{ management.Cantidad }}</td>
+                            <td>{{ management.TipoPlanManejo.ItemDescr }}</td>
+                            <!-- <td>{{ management.FolioAtencion.IPS.Nombre }}</td> -->
+                            <td>{{ management.Observacion }}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>

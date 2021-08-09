@@ -1,1 +1,37 @@
-<p>orders works!</p>
+<div class="container-fluid p-0">
+
+    <div class="row">
+
+        <div class="col-md-12 col-xl-12">
+            <div class="card flex-fill">
+                <table class="table table-hover my-0">
+                    <thead>
+                        <tr>
+                            <th>CÓDIGO</th>
+                            <th class="d-none d-xl-table-cell text-nowrap">FECHA</th>
+                            <th>NOMBRE</th>
+                            <th>CANTIDAD</th>
+                            <th>HOSPITAL</th>
+                            <th>ESTADO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let order of recordPatient.ServiciosIPS">
+
+                            <td>{{ order.ServicioIPS.Codigo }}</td>
+                            <td class="d-none d-xl-table-cell text-nowrap">{{ order.FolioAtencion.FechaAtencion }}</td>
+                            <td>{{ order.ServicioIPS.Nombre }}</td>
+                            <td>{{ order.Cantidad }}</td>
+                            <td>{{ order.FolioAtencion.IPS.Nombre }}</td>
+                            <td><span class="badge bg-success">VER FOLIO -></span></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
