@@ -112,7 +112,13 @@
                         </div>
                         <div class="card-body">
                             <div class="chart">
-                                <canvas id="chartjs-polar-area"></canvas>
+                                <!-- <canvas id="chartjs-polar-area"></canvas> -->
+                                <canvas baseChart
+                                    [data]="polarAreaChartData"
+                                    [labels]="polarAreaChartLabels"
+                                    [legend]="polarAreaLegend"
+                                    [chartType]="polarAreaChartType"
+                                    [colors]="polarAreaChartColors" ></canvas>
                             </div>
                         </div>
                     </div>
@@ -176,6 +182,24 @@
                             </div>
                         </div>
                     </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Área de servicio -->
+        <div class="col-md-4 col-xl-4">
+            <div class="row">
+                <div class="col-md-12 col-xl-12">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Área de servicio</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart">
+                                <canvas id="chartjs-polar-area"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

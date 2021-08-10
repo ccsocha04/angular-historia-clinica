@@ -10,6 +10,7 @@ export class BackgroundComponent implements OnInit {
 
   recordPatient = JSON.parse(localStorage.getItem('recordPatient'));
 
+
   constructor() { }
 
   ngOnInit(): void {
