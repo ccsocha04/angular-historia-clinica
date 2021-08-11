@@ -3,6 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+// Mdulos MatTable
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
+
 // Modulos
 import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from '../components/components.module';
@@ -35,7 +42,12 @@ import { PagesComponent } from './pages.component';
     OrdersComponent, 
     BackgroundComponent,
     ManagementComponent, 
-    PagesComponent
+    PagesComponent,
+    MatTableModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule
   ],
   imports: [
     ChartsModule,
@@ -43,7 +55,12 @@ import { PagesComponent } from './pages.component';
     RouterModule,
     FormsModule,
     SharedModule,
-    ComponentsModule
+    ComponentsModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule
   ]
 })
 export class PagesModule { }

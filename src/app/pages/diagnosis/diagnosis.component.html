@@ -1,41 +1,90 @@
 <div class="container-fluid p-0">
-
+    
+    <!-- Filtering -->
     <div class="row">
-
         <div class="col-md-12 col-xl-12">
             <div class="card flex-fill">
-                <table class="table table-hover my-0">
-                    <thead>
-                        <tr>
-                            <th rowspan="2" >CÓDIGO</th>
-                            <th rowspan="2" class="d-none d-xl-table-cell text-nowrap">FECHA</th>
-                            <th rowspan="2">NOMBRE</th>
-                            <th rowspan="2">HOSPITAL</th>
-                            <th colspan="3">DIAGNÓSTICO</th>
-                        </tr>
-                        <tr>
-                            <th>PRINCIPAL</th>
-                            <th>INGRESO</th>
-                            <th>EGRESO</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                        <tr *ngFor="let diagnosis of recordPatient.Diagnosticos">
-                            <td><strong>{{ diagnosis.Diagnostico.Codigo }}</strong></td>
-                            <td class="d-none d-xl-table-cell text-nowrap">{{ diagnosis.FolioAtencion.FechaAtencion }}</td>
-                            <td>{{ diagnosis.Diagnostico.Nombre }}</td>
-                            <td>{{ diagnosis.FolioAtencion.IPS.Nombre }}</td>
-                            <td>{{ diagnosis.DiagnosticoPrincipal }}</td>
-                            <td>{{ diagnosis.DiagnosticoIngreso }}</td>
-                            <td>{{ diagnosis.DiagnosticoEgreso }}</td>
-                        </tr>
-
-                    </tbody>
-                </table>
+                <mat-form-field appearance="standard">
+                    <mat-label>Buscar...</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Ejemplo. Hospital" #input>
+                </mat-form-field>
             </div>
+
         </div>
 
+    </div>
+    <!-- DataTable -->
+    <div class="row">
+        <div class="col-md-12 col-xl-12">
+
+            <div class="card flex-fill">
+                <div class="mat-elevation-z8">
+
+                    <table class="table table-hover my-0" mat-table [dataSource]="dataSource" matSort>
+
+                        <!-- CodeDiagnosis Column -->
+                        <ng-container matColumnDef="CodeDiagnosis">
+                            <th style="width: 10%;" mat-header-cell *matHeaderCellDef mat-sort-header> <strong>CÓDIGO</strong> </th>
+                            <td style="width: 10%;" mat-cell *matCellDef="let row"> {{ row.CodeDiagnosis }} </td>
+                        </ng-container>
+
+                        <!-- DateDiagnosis Column -->
+                        <ng-container matColumnDef="DateDiagnosis">
+                            <th style="width: 10%;" mat-header-cell *matHeaderCellDef mat-sort-header> <strong>FECHA</strong> </th>
+                            <td style="width: 10%;" mat-cell *matCellDef="let row"> {{ row.DateDiagnosis }} </td>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="Name">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> <strong>NOMBRE</strong> </th>
+                            <td mat-cell *matCellDef="let row"> {{ row.Name }} </td>
+                        </ng-container>
+
+                        <!-- Hospital Column -->
+                        <ng-container matColumnDef="Hospital">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> <strong>HOSPITAL</strong> </th>
+                            <td mat-cell *matCellDef="let row"> {{ row.Hospital }} </td>
+                        </ng-container>
+
+                        <!-- Diagnosis_Principal Column -->
+                        <ng-container matColumnDef="Diagnosis_Principal">
+                            <th style="width:5%;" mat-header-cell *matHeaderCellDef mat-sort-header> <strong>PRINCIPAL</strong> </th>
+                            <td style="width:5%;" mat-cell *matCellDef="let row"> {{ row.Diagnosis_Principal }} </td>
+                        </ng-container>
+
+                        <!-- Diagnosis_Input Column -->
+                        <ng-container matColumnDef="Diagnosis_Input">
+                            <th style="width:5%;" mat-header-cell *matHeaderCellDef mat-sort-header> <strong>INGRESO</strong> </th>
+                            <td style="width:5%;" mat-cell *matCellDef="let row"> {{ row.Diagnosis_Input }} </td>
+                        </ng-container>
+                        
+                        <!-- Diagnosis_Output Column -->
+                        <ng-container matColumnDef="Diagnosis_Output">
+                            <th style="width:5%;" mat-header-cell *matHeaderCellDef mat-sort-header> <strong>EGRESO</strong> </th>
+                            <td style="width:5%;" mat-cell *matCellDef="let row"> {{ row.Diagnosis_Output }} </td>
+                        </ng-container>
+                        
+                        <!-- State Column -->
+                        <ng-container matColumnDef="State">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> <strong>ESTADO</strong> </th>
+                            <td mat-cell *matCellDef="let row"><span class="badge bg-success"> {{row.State}} </span>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                        <!-- Row shown when there is no matching data. -->
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                        </tr>
+                    </table>
+
+                    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" aria-label="Select page of users">
+                    </mat-paginator>
+
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
