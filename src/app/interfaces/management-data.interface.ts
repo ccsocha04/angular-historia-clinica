@@ -9,5 +9,5 @@ export interface ManagementData {
     Amount: number;
     Hospital: string;
     Observations: string;
-    State: string
+    State: number
 }

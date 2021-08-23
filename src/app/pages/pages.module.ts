@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
 
 // Modulos
 import { SharedModule } from '../shared/shared.module';
@@ -47,7 +48,9 @@ import { PagesComponent } from './pages.component';
     MatFormFieldModule,
     MatPaginatorModule,
     MatSortModule,
-    MatInputModule
+    MatInputModule,
+    MatTabsModule
+    
   ],
   imports: [
     ChartsModule,
@@ -60,7 +63,9 @@ import { PagesComponent } from './pages.component';
     MatFormFieldModule,
     MatPaginatorModule,
     MatSortModule,
-    MatInputModule
+    MatInputModule,
+    MatTabsModule
+
   ]
 })
 export class PagesModule { }

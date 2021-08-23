@@ -6,5 +6,5 @@ export interface InvoiceData {
     DateAtention: string;
     Specialty: string;
     Hospital: string;
-    State: string
+    State: number
 }

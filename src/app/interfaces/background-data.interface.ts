@@ -6,5 +6,5 @@ export interface BackgroundData {
     DateBackground: string;
     Detail: string;
     Hospital: string;
-    State: string
+    State: number
 }

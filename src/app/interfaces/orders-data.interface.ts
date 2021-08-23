@@ -7,5 +7,5 @@ export interface OrdersData {
     Name: string;
     Amount: number;
     Hospital: string;
-    State: string
+    State: number
 }

@@ -9,5 +9,5 @@ export interface DiagnosisData {
     Diagnosis_Principal: string;
     Diagnosis_Input: string;
     Diagnosis_Output: string;
-    State: string
+    State: number
 }
