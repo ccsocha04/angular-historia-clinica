@@ -12,12 +12,14 @@ import { filter, map } from 'rxjs/operators';
 export class BreadcrumbsComponent implements OnDestroy {
 
   public title: string;
+  public description: string;
   public titleSubs$: Subscription;
 
   constructor( private router: Router ) { 
     this.titleSubs$ = this.getDataRoute()
-                        .subscribe( ({ titulo }) => {
+                        .subscribe( ({ titulo, descripcion }) => {
                           this.title = titulo;
+                          this.description = descripcion;
                           document.title = `AdminPro - ${ titulo }`;
                         })
   }

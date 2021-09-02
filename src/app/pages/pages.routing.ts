@@ -8,6 +8,7 @@ import { DiagnosisComponent } from './diagnosis/diagnosis.component';
 import { BackgroundComponent } from './background/background.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ManagementComponent } from './management/management.component';
+import { HcpacientComponent } from './hcpacient/hcpacient.component';
 
 
 const routes: Routes = [
@@ -15,42 +16,49 @@ const routes: Routes = [
         path: 'dashboard',
         component: PagesComponent,
         children: [
-            { path: '', component: DashboardComponent, data: {titulo: 'Paciente' } },
+            { path: '', component: DashboardComponent, data: {titulo: 'Paciente', descripcion: 'Dashboard' } },
         ]
     },
     {
         path: 'invoice',
         component: PagesComponent,
         children: [
-            { path: '', component: InvoiceComponent, data: {titulo: 'Folios de atención' } },
+            { path: '', component: InvoiceComponent, data: {titulo: 'Folios de atención', descripcion: 'Paciente' } },
         ]
     },
     {
         path: 'diagnosis',
         component: PagesComponent,
         children: [
-            { path: '', component: DiagnosisComponent, data: {titulo: 'Diagnósticos' } },
+            { path: '', component: DiagnosisComponent, data: {titulo: 'Diagnósticos', descripcion: 'Paciente' } },
         ]
     },
     {
         path: 'background',
         component: PagesComponent,
         children: [
-            { path: '', component: BackgroundComponent, data: {titulo: 'Antecedentes' } }
+            { path: '', component: BackgroundComponent, data: {titulo: 'Antecedentes', descripcion: 'Paciente' } }
         ]
     },
     {
         path: 'orders',
         component: PagesComponent,
         children: [
-            { path: '', component: OrdersComponent, data: {titulo: 'Ordenes' } }
+            { path: '', component: OrdersComponent, data: {titulo: 'Ordenes', descripcion: 'Paciente' } }
         ]
     },
     {
         path: 'management',
         component: PagesComponent,
         children: [
-            { path: '', component: ManagementComponent, data: {titulo: 'Plan de Manejo' } }
+            { path: '', component: ManagementComponent, data: {titulo: 'Plan de Manejo', descripcion: 'Paciente' } }
+        ]
+    },
+    {
+        path: 'HCPaciente',
+        component: PagesComponent,
+        children: [
+            { path: '', component: HcpacientComponent, data: {titulo: 'Integración HIS - Historia Clínica', descripcion: 'Paciente' } }
         ]
     },
 

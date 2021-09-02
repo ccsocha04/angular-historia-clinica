@@ -17,12 +17,14 @@ import { ComponentsModule } from '../components/components.module';
 
 import { ChartsModule } from 'ng2-charts';
 
+// Components
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { DiagnosisComponent } from './diagnosis/diagnosis.component';
 import { BackgroundComponent } from './background/background.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ManagementComponent } from './management/management.component';
+import { HcpacientComponent } from './hcpacient/hcpacient.component';
 import { PagesComponent } from './pages.component';
 
 
@@ -34,7 +36,8 @@ import { PagesComponent } from './pages.component';
     OrdersComponent, 
     BackgroundComponent,
     ManagementComponent, 
-    PagesComponent
+    HcpacientComponent,
+    PagesComponent, 
   ],
   exports: [
     DashboardComponent,
@@ -43,6 +46,7 @@ import { PagesComponent } from './pages.component';
     OrdersComponent, 
     BackgroundComponent,
     ManagementComponent, 
+    HcpacientComponent,
     PagesComponent,
     MatTableModule,
     MatFormFieldModule,

@@ -3,5 +3,5 @@
 
 export interface SearchForm {
     DocumentType: string;
-    DocumentNumber: number
+    DocumentNumber: string
 }

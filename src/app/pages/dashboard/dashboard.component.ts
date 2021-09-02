@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { Label, SingleDataSet, Color } from 'ng2-charts'
-import { ChartType } from 'chart.js'
-import { TestBed } from '@angular/core/testing';
-import { distinct } from 'rxjs/operators';
+import { Label, SingleDataSet, MultiDataSet, Color } from 'ng2-charts';
+import { ChartType, ChartOptions, ChartDataSets } from 'chart.js';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -11,21 +10,77 @@ import { distinct } from 'rxjs/operators';
   styles: [
   ]
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
 
   recordPatient = JSON.parse(localStorage.getItem('recordPatient'));
+  dataLabels = [];
+  dataChartLabels = [];
+  dataSetValues = {};
+  backgroundOptions = [
+    '#3b7ddd', 
+    '#ffc107', 
+    '#dc3545',
+    '#28a745',
+    '#17a2b8',
+    '#6c757d'
+  ]
+  agePatient: number = this.getAgePatient();
 
-  // PolarArea
-  public polarAreaChartLabels: Label[] = this.getLabels();
-  public polarAreaChartData: SingleDataSet = [6, 3, 11];
-  public polarAreaChartColors: Array<any> = [{ backgroundColor: [ '#3b7ddd', '#ffc107', '#dc3545'] }];
+  // PolarArea - Tipo de atención
+  public polarAreaChartLabels: Label[] = this.getLabels('TipoAtencion');
+  public polarAreaChartData: SingleDataSet = this.getDataSet();
+  public polarAreaChartColors: Array<any> = [{ backgroundColor: this.backgroundOptions }];
   public polarAreaLegend = true;
   public polarAreaChartType: ChartType = 'polarArea';
 
-  constructor() { }
+  // PolarArea - Área de servicio
+  public serviceAreaChartLabels: Label[] = this.getLabels('AreaServicio');
+  public serviceAreaChartData: SingleDataSet = this.getDataSet();
+  public serviceAreaChartColors: Array<any> = [{ backgroundColor: this.backgroundOptions }];
+  public serviceAreaLegend = true;
+  public serviceAreaChartType: ChartType = 'polarArea';
 
-  ngOnInit(): void {
+  // Doughnut - Atención por año
+  public doughnutChartLabels: Label[] = this.getLabels('Atencion');
+  public doughnutChartData: MultiDataSet = [
+    this.getDataSet(),
+  ];
+  public doughnutChartColors: Array<any> = [{ backgroundColor: this.backgroundOptions }];
+  public doughnutChartLegend = true;
+  public doughnutChartType: ChartType = 'doughnut';
 
+  // Barchart - Atención por hospital
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+  };
+  public barChartLabels: Label[] = this.getLabels('Hospital');
+  public barChartData: ChartDataSets[] = [
+    { data: this.getDataSet(), label: 'Hospital' },
+  ];
+  public barChartLegend = false;
+  public barChartType: ChartType = 'horizontalBar';
+  public barChartPlugins = [];
+  public barChartColors: Color[] = [
+    { backgroundColor: '#3b7ddd' },
+  ]
+
+  // Barchart - Atención por especialidad
+  public barSpecChartOptions: ChartOptions = {
+    responsive: true,
+  };
+  public barSpecChartLabels: Label[] = this.getLabels('Especialidad');
+  public barSpecChartData: ChartDataSets[] = [
+    { data: this.getDataSet(), label: 'Especialidad' },
+  ];
+  public barSpecChartLegend = false;
+  public barSpecChartType: ChartType = 'horizontalBar';
+  public barSpecChartPlugins = [];
+  public barSpecChartColors: Color[] = [
+    { backgroundColor: '#ffc107' },
+  ]
+
+  constructor() { 
+    // this.getAgePatient();
   }
 
   // Events
@@ -37,20 +92,77 @@ export class DashboardComponent implements OnInit {
     console.log(event, active);
   }
 
-  getLabels() {
-    
+  getLabels( object: string ) {
     var chartLabels: Array<any> = [];
+    switch (object) {
+      case 'TipoAtencion':
+        this.recordPatient.Folios.forEach(element => {
+          chartLabels.push(element.TipoAtencion.ItemDescr);
+        });    
+        break;
 
-    this.recordPatient.Folios.forEach(element => {
-      chartLabels.push(element.AreaServicio.Nombre);
+      case 'AreaServicio':
+        this.recordPatient.Folios.forEach(element => {
+          chartLabels.push(element.AreaServicio.Nombre);
+        });
+        break;
+
+      case 'Atencion':
+        this.recordPatient.Folios.forEach(element => {
+          var dateAtention = new Date(element.FechaAtencion);
+          var yearAtention = dateAtention.getFullYear();
+          chartLabels.push(yearAtention);
+        });
+        break;
+
+      case 'Hospital':
+        this.recordPatient.Folios.forEach(element => {
+          chartLabels.push(element.IPS.Nombre);
+        });
+        break;
+
+      case 'Especialidad':
+        this.recordPatient.Folios.forEach(element => {
+          chartLabels.push(element.Especialidad.Nombre);
+        });
+        break;
+        
+      default:
+        break;
+    }
+    
+    this.dataLabels = [...new Set(chartLabels)];
+    this.getValues(chartLabels);
+    return this.dataLabels.sort();
+  }
+
+  getValues(chart: Array<any>) {
+    chart.forEach(val => {
+      this.dataSetValues[val] = (this.dataSetValues[val] || 0) + 1;
     });
-
-    return [...new Set(chartLabels)];
   }
 
   getDataSet() {
-    console.log('generar lógica');
+    var chartDataSet: Array<any> = [];
+    this.dataLabels.forEach(value => {
+      chartDataSet.push(this.dataSetValues[value])
+    });
+    console.log(chartDataSet);
+    return chartDataSet;
+  }
+
+  getAgePatient() {
+    var today = new Date();
+    var birthday = new Date(this.recordPatient.FechaNacimiento);
+
+    var age = today.getFullYear() - birthday.getFullYear();
+    var month = today.getMonth() - birthday.getMonth();
+
+    if (month < 0 || (month === 0 && today.getDate() < birthday.getDate())) {
+        age--;
+    }
     
+    return age;
   }
 
 }

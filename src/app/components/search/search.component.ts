@@ -27,7 +27,7 @@ export class SearchComponent {
     private userService: UserService) { }
 
   search() {
-
+    
     const recordQuery: any = {
       "Codigo": "GEENPaciente",
       "Valores": [

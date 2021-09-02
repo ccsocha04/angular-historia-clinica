@@ -16,7 +16,7 @@ export class UserService {
 
   constructor( private http: HttpClient ) { }
 
-  loginUser(formData: LoginForm) {
+  loginUser(formData) {
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -34,7 +34,9 @@ export class UserService {
       tap( (resp: any) => {
         localStorage.setItem('type_token', resp.token_type);
         localStorage.setItem('access_token', resp.access_token)
-      })
+      }),
+      map( resp => true ),
+      catchError( error => of(error) )
     );
 
   }
