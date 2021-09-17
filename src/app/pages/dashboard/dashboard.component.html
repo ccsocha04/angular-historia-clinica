@@ -62,7 +62,7 @@
                             </tr>
                             <tr>
                                 <th>Edad</th>
-                                <td class="text-primary"><strong>{{ agePatient }} años</strong></td>
+                                <td class="text-primary"><strong>{{ agePatient }}</strong></td>
                             </tr>
                             <tr>
                                 <th>Sexo</th>
@@ -236,7 +236,7 @@
                     <br>
                     <div class="align-items-start">
                         <ul class="timeline mt-2 mb-0">
-                            <li class="timeline-item" *ngFor="let activity of recordPatient.Folios.slice(-3)">
+                            <li class="timeline-item" *ngFor="let activity of recordPatient.Folios.slice(-5)">
                                 <strong>{{ activity.TipoAtencion.ItemDescr }}</strong>
                                 <span class="float-end text-muted text-sm">{{ activity.FechaAtencion.substring(0, 10)}}</span>
                                 <p>{{ activity.NombreCentroAtencion }} - {{ activity.Especialidad.Nombre }}<br>{{ activity.AreaServicio.Nombre }}</p>
@@ -271,6 +271,34 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-sm-6 col-xl-6">
+            <!-- Tipo de atención -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col mt-0">
+                            <h4 class="card-title">Tipo de atención</h4>
+                        </div>
+                        <div class="col-auto">
+                            <div class="stat text-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-pie-chart">
+                                    <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                                    <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="chart">
+                        <canvas baseChart [data]="polarAreaChartData" [labels]="polarAreaChartLabels"
+                            [legend]="polarAreaLegend" [chartType]="polarAreaChartType"
+                            [colors]="polarAreaChartColors"></canvas>
+                    </div>
+                </div>
+            </div>
             <!-- Atención por hospital -->
             <div class="card">
                 <div class="card-body">
@@ -300,36 +328,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-6 col-xl-6">
-            <!-- Tipo de atención -->
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col mt-0">
-                            <h4 class="card-title">Tipo de atención</h4>
-                        </div>
-                        <div class="col-auto">
-                            <div class="stat text-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-pie-chart">
-                                    <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
-                                    <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="chart">
-                        <canvas baseChart [data]="polarAreaChartData" [labels]="polarAreaChartLabels"
-                            [legend]="polarAreaLegend" [chartType]="polarAreaChartType"
-                            [colors]="polarAreaChartColors"></canvas>
-                    </div>
-                </div>
-            </div>
             <!-- Área de servicio -->
-            <div class="card">
+            <!-- <div class="card">
                 <div class="card-body">
                     <div class="row">
                         <div class="col mt-0">
@@ -353,7 +353,7 @@
                             [colors]="serviceAreaChartColors"></canvas>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- Atención por especialidad -->
             <div class="card">
                 <div class="card-body">
@@ -387,7 +387,7 @@
     </div>
 
     <!-- Contador Diagnósticos -> Antecedentes -> Ordenes -> Plan de Manejo -->
-    <div class="row">
+    <div class="row" *ngIf="recordPatient.Diagnosticos.length > 0">
         <!-- Diagnósticos -->
         <div class="col-sm-6 col-xl-3">
             <div class="card">
@@ -410,22 +410,22 @@
                     </div>
                     <h1 class="mt-1 mb-3">{{ recordPatient.Diagnosticos.length }}</h1>
                     <div class="mb-0">
-                        <span class="badge badge-success-light"> <em class="mdi mdi-arrow-bottom-right"></em> 3.65%
+                        <span class="badge badge-primary-light"> <em class="mdi mdi-arrow-bottom-right"></em> 
+                            <span class="text-muted">Ultimo diagnostico => </span>
+                            {{ recordPatient.Diagnosticos[recordPatient.Diagnosticos.length-1].FolioAtencion.FechaAtencion.substring(0, 10) }}
                         </span>
-                        <span class="text-muted">Since last week</span>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Antecedentes -->
-        <div class="col-sm-6 col-xl-3">
+        <div class="col-sm-6 col-xl-3" *ngIf="recordPatient.Antecedentes.length > 0">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
                         <div class="col mt-0">
                             <h4 class="card-title">Antecedentes</h4>
                         </div>
-
                         <div class="col-auto">
                             <div class="stat text-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -438,16 +438,17 @@
                         </div>
                     </div>
                     <h1 class="mt-1 mb-3">{{ recordPatient.Antecedentes.length }}</h1>
-                    <!-- <div class="mb-0">
-                        <span class="badge badge-danger-light"> <em class="mdi mdi-arrow-bottom-right"></em> -5.25%
+                    <div class="mb-0">
+                        <span class="badge badge-primary-light"> <em class="mdi mdi-arrow-bottom-right"></em>
+                            <span class="text-muted">Ultimo antecedente => </span>
+                            {{ recordPatient.Antecedentes[recordPatient.Antecedentes.length-1].Fecha.substring(0, 10) }}
                         </span>
-                        <span class="text-muted">Since last week</span>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
         <!-- Ordenes -->
-        <div class="col-sm-6 col-xl-3">
+        <div class="col-sm-6 col-xl-3" *ngIf="recordPatient.ServiciosIPS.length > 0">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -468,16 +469,17 @@
                         </div>
                     </div>
                     <h1 class="mt-1 mb-3">{{ recordPatient.ServiciosIPS.length }}</h1>
-                    <!-- <div class="mb-0">
-                        <span class="badge badge-success-light"> <em class="mdi mdi-arrow-bottom-right"></em> 4.65%
+                    <div class="mb-0">
+                        <span class="badge badge-primary-light"> <em class="mdi mdi-arrow-bottom-right"></em>
+                            <span class="text-muted">Ultima orden => </span>
+                            {{ recordPatient.ServiciosIPS[recordPatient.ServiciosIPS.length-1].FolioAtencion.FechaAtencion.substring(0, 10) }}
                         </span>
-                        <span class="text-muted">Since last week</span>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
         <!-- Plan de manejo -->
-        <div class="col-sm-6 col-xl-3">
+        <div class="col-sm-6 col-xl-3" *ngIf="recordPatient.PlanManejo.length > 0">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -498,11 +500,12 @@
                         </div>
                     </div>
                     <h1 class="mt-1 mb-3">{{ recordPatient.PlanManejo.length }}</h1>
-                    <!-- <div class="mb-0">
-                        <span class="badge badge-success-light"> <em class="mdi mdi-arrow-bottom-right"></em> 2.35%
+                    <div class="mb-0">
+                        <span class="badge badge-primary-light"> <em class="mdi mdi-arrow-bottom-right"></em>
+                            <span class="text-muted">Ultimo plan de manejo => </span>
+                            {{ recordPatient.PlanManejo[recordPatient.PlanManejo.length-1].FolioAtencion.FechaAtencion.substring(0, 10) }}
                         </span>
-                        <span class="text-muted">Since last week</span>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>

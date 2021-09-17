@@ -9,6 +9,9 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
+ /* @import url(../css/spinners.css); */
+
  :root {
     --bs-blue: #3b7ddd;
     --bs-indigo: #0a0a0a;

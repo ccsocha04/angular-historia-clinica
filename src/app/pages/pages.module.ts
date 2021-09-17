@@ -7,9 +7,12 @@ import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableFilterModule } from 'mat-table-filter';
 
 // Modulos
 import { SharedModule } from '../shared/shared.module';
@@ -37,7 +40,24 @@ import { PagesComponent } from './pages.component';
     BackgroundComponent,
     ManagementComponent, 
     HcpacientComponent,
-    PagesComponent, 
+    PagesComponent
+  ],
+  imports: [
+    ChartsModule,
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    SharedModule,
+    ComponentsModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule,
+    MatTabsModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    MatTableFilterModule
   ],
   exports: [
     DashboardComponent,
@@ -53,23 +73,11 @@ import { PagesComponent } from './pages.component';
     MatPaginatorModule,
     MatSortModule,
     MatInputModule,
-    MatTabsModule
-    
-  ],
-  imports: [
-    ChartsModule,
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    SharedModule,
-    ComponentsModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatInputModule,
-    MatTabsModule
-
+    MatTabsModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    MatTableFilterModule
   ]
 })
+
 export class PagesModule { }

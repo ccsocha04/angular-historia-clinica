@@ -3,6 +3,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatTableFilter } from 'mat-table-filter';
 
 import { DiagnosisData } from '../../interfaces/diagnosis-data.interface';
 
@@ -13,6 +14,19 @@ export interface DiagnosisTab {
 }
 
 
+export class DiagnosisClass {
+  CodeDiagnosis: string;
+  DateDiagnosis: string;
+  Name: string;
+  Hospital: string;
+  Diagnosis_Principal: string;
+  Diagnosis_Input: string;
+  Diagnosis_Output: string;
+  State: number
+}
+
+let DIAGNOSIS_INFORMATION: DiagnosisClass[] = []
+
 @Component({
   selector: 'app-diagnosis',
   templateUrl: './diagnosis.component.html',
@@ -22,6 +36,9 @@ export interface DiagnosisTab {
 export class DiagnosisComponent implements AfterViewInit, OnInit {
 
   recordPatient = JSON.parse(localStorage.getItem('recordPatient'));
+
+  filterEntity: DiagnosisClass;
+  filterType: MatTableFilter;
   
   // Material Table
   displayedColumns: string[] = ['CodeDiagnosis', 'DateDiagnosis', 'Name', 'Hospital', 'Diagnosis_Principal', 'Diagnosis_Input', 'Diagnosis_Output', 'State'];
@@ -35,9 +52,6 @@ export class DiagnosisComponent implements AfterViewInit, OnInit {
   recordBackground = [];
   recordOrder = [];
   recordManagement = [];
-  
-  filterValues = {};
-  filterSelectObj = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -46,53 +60,23 @@ export class DiagnosisComponent implements AfterViewInit, OnInit {
 
     // DataSource
     const dataSource = Array.from({ length: this.recordPatient.Diagnosticos.length }, (_, k) => this.getDataSource(k));
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(dataSource);
-
-    this.filterSelectObj = [
-      {
-        name: 'CÓDIGO',
-        columnProp: 'CodeDiagnosis',
-        options: []
-      }, {
-        name: 'FECHA',
-        columnProp: 'DateDiagnosis',
-        options: []
-      }, {
-        name: 'NOMBRE',
-        columnProp: 'Name',
-        options: []
-      }, {
-        name: 'HOSPITAL',
-        columnProp: 'Hospital',
-        options: []
-      }
-    ];
+    DIAGNOSIS_INFORMATION = dataSource;
 
   }
 
   ngOnInit(): void {
-    this.filterSelectObj.filter((object) => {
-      object.options = this.getFilterObject(this.dataSource, object.columnProp);
-    });
-    // Overrride default filter behaviour of Material Datatable
-    this.dataSource.filterPredicate = this.createFilter();
+
+    this.filterEntity = new DiagnosisClass();
+    this.filterType = MatTableFilter.ANYWHERE;
+
+    // Assign the data to the data source for the table to render
+    this.dataSource = new MatTableDataSource(DIAGNOSIS_INFORMATION);
+    
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-  }
-
-  applyFilter(event: Event) {
-
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-
   }
 
   detailDiagnosis(id: number) {
@@ -134,7 +118,6 @@ export class DiagnosisComponent implements AfterViewInit, OnInit {
   }
 
   activeDiagnosis() {
-
     // Refresh actual page
     location.reload();
     this.dataDiagnosis = false;
@@ -154,65 +137,5 @@ export class DiagnosisComponent implements AfterViewInit, OnInit {
       State: diagnosis.FolioAtencion.Oid
     }
   }
-
-  // Get Uniqu values from columns to build filter
-  getFilterObject(fullObj: any, key: string) {
-
-    const uniqChk = [];
-    fullObj.filteredData.filter((obj) => {
-      if (!uniqChk.includes(obj[key])) {
-        uniqChk.push(obj[key]);
-      }
-      return obj;
-    });
-    return uniqChk;
-
-  }
-
-  // Called on Filter change
-  filterChange(filter: any, event: Event) {
-
-    this.filterValues[filter.columnProp] = (event.target as HTMLSelectElement).value.trim().toLowerCase();
-    console.log(this.filterValues);
-    this.dataSource.filter = JSON.stringify(this.filterValues);
-
-  }
-
-  // Custom filter method fot Angular Material Datatable
-  createFilter() {
-    let filterFunction = function (data: any, filter: string): boolean {
-
-      let searchTerms = JSON.parse(filter);
-      let isFilterSet = false;
-
-      for (const col in searchTerms) {
-        if (searchTerms[col].toString() !== '') {
-          isFilterSet = true;
-        } else {
-          delete searchTerms[col];
-        }
-      }
-
-      let nameSearch = () => {
-        let found = false;
-        if (isFilterSet) {
-          for (const col in searchTerms) {
-            searchTerms[col].trim().toLowerCase().split(' ').forEach(word => {
-              if (data[col].toString().toLowerCase().indexOf(word) != -1 && isFilterSet) {
-                found = true
-              }
-            });
-          }
-          return found
-        } else {
-          return true;
-        }
-      }
-      return nameSearch();
-    }
-
-    return filterFunction;
-  }
-  
 
 }

@@ -24,7 +24,7 @@ export class DashboardComponent {
     '#17a2b8',
     '#6c757d'
   ]
-  agePatient: number = this.getAgePatient();
+  agePatient: string = this.getAgePatient();
 
   // PolarArea - Tipo de atención
   public polarAreaChartLabels: Label[] = this.getLabels('TipoAtencion');
@@ -34,11 +34,11 @@ export class DashboardComponent {
   public polarAreaChartType: ChartType = 'polarArea';
 
   // PolarArea - Área de servicio
-  public serviceAreaChartLabels: Label[] = this.getLabels('AreaServicio');
-  public serviceAreaChartData: SingleDataSet = this.getDataSet();
-  public serviceAreaChartColors: Array<any> = [{ backgroundColor: this.backgroundOptions }];
-  public serviceAreaLegend = true;
-  public serviceAreaChartType: ChartType = 'polarArea';
+  // public serviceAreaChartLabels: Label[] = this.getLabels('AreaServicio');
+  // public serviceAreaChartData: SingleDataSet = this.getDataSet();
+  // public serviceAreaChartColors: Array<any> = [{ backgroundColor: this.backgroundOptions }];
+  // public serviceAreaLegend = true;
+  // public serviceAreaChartType: ChartType = 'polarArea';
 
   // Doughnut - Atención por año
   public doughnutChartLabels: Label[] = this.getLabels('Atencion');
@@ -79,9 +79,7 @@ export class DashboardComponent {
     { backgroundColor: '#ffc107' },
   ]
 
-  constructor() { 
-    // this.getAgePatient();
-  }
+  constructor() { }
 
   // Events
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
@@ -97,6 +95,9 @@ export class DashboardComponent {
     switch (object) {
       case 'TipoAtencion':
         this.recordPatient.Folios.forEach(element => {
+          if (element.TipoAtencion.ItemDescr === 'Ambulatorio') {
+            element.TipoAtencion.ItemDescr = 'Consulta Externa';
+          }
           chartLabels.push(element.TipoAtencion.ItemDescr);
         });    
         break;
@@ -147,7 +148,6 @@ export class DashboardComponent {
     this.dataLabels.forEach(value => {
       chartDataSet.push(this.dataSetValues[value])
     });
-    console.log(chartDataSet);
     return chartDataSet;
   }
 
@@ -160,9 +160,17 @@ export class DashboardComponent {
 
     if (month < 0 || (month === 0 && today.getDate() < birthday.getDate())) {
         age--;
+        if (month < 0) {
+          month = 12 + month;
+        }
+        if (month === 0 && today.getDate() < birthday.getDate()) {
+          month = 11;
+        }
+
     }
-    
-    return age;
+    var stringAge = age + ' años ' + month + ' meses'
+
+    return stringAge;
   }
 
 }

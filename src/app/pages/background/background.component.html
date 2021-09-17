@@ -7,8 +7,10 @@
                 <div class="mat-elevation-z8">
 
                     <div class="col-md-12 col-xl-12">
-                        <table class="table table-hover my-0" mat-table [dataSource]="dataSource" matSort>
-
+                        <table class="table table-hover my-0" mat-table matTableFilter 
+                            [exampleEntity]="filterEntity" 
+                            [filterType]="filterType"
+                            [dataSource]="dataSource" matSort>
                             <!-- TypeBackground Column -->
                             <ng-container matColumnDef="TypeBackground">
                                 <th style="width: 15%;" mat-header-cell *matHeaderCellDef mat-sort-header> <strong>TIPO
@@ -50,7 +52,7 @@
                             <ng-container matColumnDef="filterTypeBackground">
                                 <th style="width: 15%;" mat-header-cell *matHeaderCellDef>
                                     <mat-form-field appearance="fill">
-                                        <input matInput (keyup)="filterChange(filterSelectObj[0], $event)"
+                                        <input matInput [(ngModel)]="filterEntity.TypeBackground"
                                             placeholder="Ejemplo. Médicos" #input>
                                     </mat-form-field>
                                 </th>
@@ -60,7 +62,7 @@
                             <ng-container matColumnDef="filterDateBackground">
                                 <th mat-header-cell *matHeaderCellDef>
                                     <mat-form-field appearance="fill">
-                                        <input matInput (keyup)="filterChange(filterSelectObj[1], $event)"
+                                        <input matInput [(ngModel)]="filterEntity.DateBackground"
                                             placeholder="Ejemplo. 12/08/2021" #input>
                                     </mat-form-field>
                                 </th>
@@ -70,7 +72,7 @@
                             <ng-container matColumnDef="filterDetail">
                                 <th mat-header-cell *matHeaderCellDef>
                                     <mat-form-field appearance="fill">
-                                        <input matInput (keyup)="filterChange(filterSelectObj[2], $event)"
+                                        <input matInput [(ngModel)]="filterEntity.Detail"
                                             placeholder="Ejemplo. Hipotiroidismo" #input>
                                     </mat-form-field>
                                 </th>
@@ -80,7 +82,7 @@
                             <ng-container matColumnDef="filterHospital">
                                 <th mat-header-cell *matHeaderCellDef>
                                     <mat-form-field appearance="fill">
-                                        <input matInput (keyup)="filterChange(filterSelectObj[3], $event)"
+                                        <input matInput [(ngModel)]="filterEntity.Hospital"
                                             placeholder="Ejemplo. Hospital San Rafael" #input>
                                     </mat-form-field>
                                 </th>
@@ -118,340 +120,294 @@
     <!-- Detail Background -->
     <div class="row" *ngIf="dataBackground">
         <div class="col-12 col-lg-12">
-            <div class="card flex-fill">
-                <div class="mat-elevation-z8">
-                    <div class="tab tab-success">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#detailInvoice" data-bs-toggle="tab" role="tab">
-                                    <div class="position-relative">
-                                        <span class="align-middle">Detalle Folio <span class="indicator">4</span></span>
+            <div class="tab">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#detailInvoice" data-bs-toggle="tab" role="tab">
+                            <div class="position-relative">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-activity">
+                                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                                </svg>
+                                <span class="align-middle"> Detalle Folio</span>
+                                <!-- <span class="indicator">4</span> -->
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item" *ngIf="this.recordDiagnosis.length > 0">
+                        <a class="nav-link" href="#detailDiagnosis" data-bs-toggle="tab" role="tab">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-check-square">
+                                <polyline points="9 11 12 14 22 4"></polyline>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                            </svg>
+                            <span class="align-middle"> Diágnosticos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" *ngIf="this.recordBackground.length > 0">
+                        <a class="nav-link" href="#detailBackground" data-bs-toggle="tab" role="tab">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-eye">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            <span class="align-middle"> Antecedentes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" *ngIf="this.recordOrder.length > 0">
+                        <a class="nav-link" href="#detailOrders" data-bs-toggle="tab" role="tab">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-clipboard">
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2">
+                                </path>
+                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                            </svg>
+                            <span class="align-middle"> Ordenes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" *ngIf="this.recordManagement.length > 0">
+                        <a class="nav-link" href="#detailManagement" data-bs-toggle="tab" role="tab">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-heart">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                </path>
+                            </svg>
+                            <span class="align-middle"> Plan de manejo</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <!-- Detail Invoice -->
+                    <div class="tab-pane active" id="detailInvoice" role="tabpanel">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <label class="form-label" for="typeAtentionForm">Tipo de
+                                            atención</label>
+                                        <input class="form-control form-control-sm" type="text" id="typeAtentionForm"
+                                            value="{{ recordInvoice['TipoAtencion'].ItemDescr }}"
+                                            placeholder="typeAtentionForm" readonly>
                                     </div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#detailDiagnosis" data-bs-toggle="tab" role="tab">
-                                    <span class="align-middle">Diágnosticos</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#detailBackground" data-bs-toggle="tab" role="tab">
-                                    <span class="align-middle">Antecedentes</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#detailOrders" data-bs-toggle="tab" role="tab">
-                                    <span class="align-middle">Ordenes</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#detailManagement" data-bs-toggle="tab" role="tab">
-                                    <span class="align-middle">Plan de manejo</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown"
-                                    data-bs-toggle="dropdown">
-
-                                </a>
-                            </li>
-                            <!-- <li class="nav-item">
-                                    <a class="nav-link" href="#colored-icon-3" data-bs-toggle="tab" role="tab"
-                                        aria-selected="true">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" class="feather feather-message-square align-middle">
-                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                                        </svg>
-                                    </a>
-                                </li> -->
-                        </ul>
-                        <div class="tab-content">
-                            <!-- Detail Invoice -->
-                            <div class="tab-pane active" id="detailInvoice" role="tabpanel">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <form>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <label class="form-label" for="typeAtentionForm">Tipo de
-                                                            atención</label>
-                                                        <input class="form-control form-control-sm" type="text"
-                                                            id="typeAtentionForm"
-                                                            value="{{ recordInvoice['TipoAtencion'].ItemDescr }}"
-                                                            placeholder="typeAtentionForm" readonly>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <label class="form-label" for="DateAtentionForm">Fecha de
-                                                            atención</label>
-                                                        <input class="form-control form-control-sm" type="text"
-                                                            id="DateAtentionForm"
-                                                            value="{{ recordInvoice['FechaAtencion'] }}"
-                                                            placeholder="DateAtentionForm" readonly>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <label class="form-label" for="IPSForm">IPS</label>
-                                                        <input class="form-control form-control-sm" type="text"
-                                                            id="IPSForm" value="{{ recordInvoice['IPS'].Nombre }}"
-                                                            placeholder="IPSForm" readonly>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <label class="form-label" for="EntityForm">Entidad
-                                                            administradora</label>
-                                                        <input class="form-control form-control-sm" type="text"
-                                                            id="EntityForm"
-                                                            value="{{ recordInvoice['EntidadAdministradora'].Nombre }}"
-                                                            placeholder="EntityForm" readonly>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <label class="form-label"
-                                                            for="SpecialtyForm">Especialidad</label>
-                                                        <input class="form-control form-control-sm" type="text"
-                                                            id="SpecialtyForm"
-                                                            value="{{ recordInvoice['Especialidad'].Nombre }}"
-                                                            placeholder="SpecialtyForm" readonly>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <label class="form-label" for="ServiceForm">Área de
-                                                            servicio</label>
-                                                        <input class="form-control form-control-sm" type="text"
-                                                            id="ServiceForm"
-                                                            value="{{ recordInvoice['AreaServicio'].Nombre }}"
-                                                            placeholder="ServiceForm" readonly>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="card">
-                                                        <label class="form-label" for="SpecialtyForm">Profesional
-                                                            Médico</label>
-                                                        <input class="form-control form-control-sm" type="text"
-                                                            id="SpecialtyForm"
-                                                            value="{{ recordInvoice['ProfesionalMedico'].PrimerNombre }} {{ recordInvoice['ProfesionalMedico'].SegundoNombre }} {{ recordInvoice['ProfesionalMedico'].PrimerApellido }} {{ recordInvoice['ProfesionalMedico'].SegundoApellido }}"
-                                                            placeholder="SpecialtyForm" readonly>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="card">
-                                                        <label class="form-label" for="SubjForm">Subjetivo</label>
-                                                        <textarea rows="3" class="form-control form-control-sm"
-                                                            id="SubjForm" placeholder="SubjetivoForm"
-                                                            readonly>{{ recordInvoice['Subjetivo'] }}</textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="card">
-                                                        <label class="form-label" for="ObjForm">Objetivo</label>
-                                                        <textarea rows="3" class="form-control form-control-sm"
-                                                            id="ObjForm" placeholder="ObjetivoForm"
-                                                            readonly>{{ recordInvoice['Objetivo'] }}</textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="card">
-                                                        <label class="form-label" for="AnalysisForm">Análisis</label>
-                                                        <textarea rows="3" class="form-control form-control-sm"
-                                                            id="AnalysisForm" placeholder="AnálisisForm"
-                                                            readonly>{{ recordInvoice['Analisis'] }}</textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="card">
-                                                        <label class="form-label" for="PlanForm">Plan</label>
-                                                        <textarea rows="3" class="form-control form-control-sm"
-                                                            id="PlanForm" placeholder="AnálisisForm"
-                                                            readonly>{{ recordInvoice['Plan'] }}</textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="card-body">
-                                        <button type="submit" class="btn btn-success" (click)="activeBackground()">
-                                            Regresar -> </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <label class="form-label" for="DateAtentionForm">Fecha de
+                                            atención</label>
+                                        <input class="form-control form-control-sm" type="text" id="DateAtentionForm"
+                                            value="{{ recordInvoice['FechaAtencion'] }}" placeholder="DateAtentionForm"
+                                            readonly>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Detail Diagnosis -->
-                            <div class="tab-pane" id="detailDiagnosis" role="tabpanel">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <table class="table table-striped table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th><strong> CÓDIGO </strong></th>
-                                                    <th><strong> NOMBRE </strong></th>
-                                                    <th><strong> PRINCIPAL </strong></th>
-                                                    <th><strong> INGRESO </strong></th>
-                                                    <th><strong> EGRESO </strong></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr *ngFor="let diagnosis of recordDiagnosis">
-                                                    <td>{{ diagnosis.Diagnostico.Codigo }}</td>
-                                                    <td>{{ diagnosis.Diagnostico.Nombre }}</td>
-                                                    <td>{{ diagnosis.DiagnosticoPrincipal }}</td>
-                                                    <td>{{ diagnosis.DiagnosticoIngreso }}</td>
-                                                    <td>{{ diagnosis.DiagnosticoEgreso }}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <label class="form-label" for="IPSForm">IPS</label>
+                                        <input class="form-control form-control-sm" type="text" id="IPSForm"
+                                            value="{{ recordInvoice['IPS'].Nombre }}" placeholder="IPSForm" readonly>
                                     </div>
-                                    <div class="card-body">
-                                        <button type="submit" class="btn btn-success" (click)="activeBackground()">
-                                            Regresar -> </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <label class="form-label" for="EntityForm">Entidad
+                                            administradora</label>
+                                        <input class="form-control form-control-sm" type="text" id="EntityForm"
+                                            value="{{ recordInvoice['EntidadAdministradora'].Nombre }}"
+                                            placeholder="EntityForm" readonly>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Detail Background -->
-                            <div class="tab-pane" id="detailBackground" role="tabpanel">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <table class="table table-striped table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th><strong> TIPO </strong></th>
-                                                    <th><strong> FECHA </strong></th>
-                                                    <th><strong> DETALLE </strong></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr *ngFor="let background of recordBackground">
-                                                    <td>{{ background.TipoAntecedente.ItemDescr }}</td>
-                                                    <td>{{ background.Fecha }}</td>
-                                                    <td>{{ background.Detalle }}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <label class="form-label" for="SpecialtyForm">Especialidad</label>
+                                        <input class="form-control form-control-sm" type="text" id="SpecialtyForm"
+                                            value="{{ recordInvoice['Especialidad'].Nombre }}"
+                                            placeholder="SpecialtyForm" readonly>
                                     </div>
-                                    <div class="card-body">
-                                        <button type="submit" class="btn btn-success" (click)="activeBackground()">
-                                            Regresar -> </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <label class="form-label" for="ServiceForm">Área de
+                                            servicio</label>
+                                        <input class="form-control form-control-sm" type="text" id="ServiceForm"
+                                            value="{{ recordInvoice['AreaServicio'].Nombre }}" placeholder="ServiceForm"
+                                            readonly>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Detail Orders -->
-                            <div class="tab-pane" id="detailOrders" role="tabpanel">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <table class="table table-striped table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th><strong> CÓDIGO </strong></th>
-                                                    <th><strong> NOMBRE </strong></th>
-                                                    <th><strong> CANTIDAD </strong></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr *ngFor="let order of recordOrder">
-                                                    <td>{{ order.ServicioIPS.Codigo }}</td>
-                                                    <td>{{ order.ServicioIPS.Nombre }}</td>
-                                                    <td>{{ order.Cantidad }}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="card-body">
-                                        <button type="submit" class="btn btn-success" (click)="activeBackground()">
-                                            Regresar -> </button>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <label class="form-label" for="SpecialtyForm">Profesional
+                                            Médico</label>
+                                        <input class="form-control form-control-sm" type="text" id="SpecialtyForm"
+                                            value="{{ recordInvoice['ProfesionalMedico'].PrimerNombre }} {{ recordInvoice['ProfesionalMedico'].SegundoNombre }} {{ recordInvoice['ProfesionalMedico'].PrimerApellido }} {{ recordInvoice['ProfesionalMedico'].SegundoApellido }}"
+                                            placeholder="SpecialtyForm" readonly>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Detail Management -->
-                            <div class="tab-pane" id="detailManagement" role="tabpanel">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <table class="table table-striped table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th><strong> TIPO </strong></th>
-                                                    <th><strong> OBSERVACIÓN </strong></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr *ngFor="let management of recordManagement">
-                                                    <ng-container
-                                                        *ngIf="management.TipoPlanManejo.ItemDescr === 'Indicacion'">
-                                                        <td>{{ management.TipoPlanManejo.ItemDescr }}</td>
-                                                        <td>{{ management.Observacion }}</td>
-                                                    </ng-container>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="card-body">
-                                        <table class="table table-striped table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th><strong> TIPO </strong></th>
-                                                    <th><strong> NOMBRE </strong></th>
-                                                    <th><strong> CANTIDAD </strong></th>
-                                                    <th><strong> OBSERVACIÓN </strong></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr *ngFor="let management of recordManagement">
-                                                    <ng-container
-                                                        *ngIf="management.TipoPlanManejo.ItemDescr === 'Medicamento'">
-                                                        <td>{{ management.TipoPlanManejo.ItemDescr }}</td>
-                                                        <td>{{ management.Medicamento.Nombre }}</td>
-                                                        <td>{{ management.Cantidad }}</td>
-                                                        <td>{{ management.Observacion }}</td>
-                                                    </ng-container>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="card-body">
-                                        <button type="submit" class="btn btn-success" (click)="activeBackground()">
-                                            Regresar -> </button>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <label class="form-label" for="SubjForm">Subjetivo</label>
+                                        <textarea rows="3" class="form-control form-control-sm" id="SubjForm"
+                                            placeholder="SubjetivoForm"
+                                            readonly>{{ recordInvoice['Subjetivo'] }}</textarea>
                                     </div>
                                 </div>
                             </div>
-
-
-                            <div class="tab-pane" id="colored-icon-3" role="tabpanel">
-                                <h4 class="tab-title">One more</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                    dolor tellus eget condimentum
-                                    rhoncus. Aenean massa. Cum sociis natoque penatibus et magnis neque dis parturient
-                                    montes, nascetur ridiculus mus.
-                                </p>
-                                <p>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat
-                                    massa quis enim. Donec pede
-                                    justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
-                                    imperdiet a, venenatis vitae,
-                                    justo.</p>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <label class="form-label" for="ObjForm">Objetivo</label>
+                                        <textarea rows="3" class="form-control form-control-sm" id="ObjForm"
+                                            placeholder="ObjetivoForm"
+                                            readonly>{{ recordInvoice['Objetivo'] }}</textarea>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <label class="form-label" for="AnalysisForm">Análisis</label>
+                                        <textarea rows="3" class="form-control form-control-sm" id="AnalysisForm"
+                                            placeholder="AnálisisForm"
+                                            readonly>{{ recordInvoice['Analisis'] }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <label class="form-label" for="PlanForm">Plan</label>
+                                        <textarea rows="3" class="form-control form-control-sm" id="PlanForm"
+                                            placeholder="AnálisisForm" readonly>{{ recordInvoice['Plan'] }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <button type="submit" class="btn btn-success" (click)="activeBackground()"> Regresar ->
+                        </button>
+                    </div>
+
+                    <!-- Detail Diagnosis -->
+                    <div class="tab-pane" id="detailDiagnosis" role="tabpanel">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th><strong> CÓDIGO </strong></th>
+                                    <th><strong> NOMBRE </strong></th>
+                                    <th><strong> PRINCIPAL </strong></th>
+                                    <th><strong> INGRESO </strong></th>
+                                    <th><strong> EGRESO </strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let diagnosis of recordDiagnosis">
+                                    <td>{{ diagnosis.Diagnostico.Codigo }}</td>
+                                    <td>{{ diagnosis.Diagnostico.Nombre }}</td>
+                                    <td>{{ diagnosis.DiagnosticoPrincipal }}</td>
+                                    <td>{{ diagnosis.DiagnosticoIngreso }}</td>
+                                    <td>{{ diagnosis.DiagnosticoEgreso }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="submit" class="btn btn-success" (click)="activeBackground()"> Regresar ->
+                        </button>
+                    </div>
+
+                    <!-- Detail Background -->
+                    <div class="tab-pane" id="detailBackground" role="tabpanel">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th><strong> TIPO </strong></th>
+                                    <th><strong> FECHA </strong></th>
+                                    <th><strong> DETALLE </strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let background of recordBackground">
+                                    <td>{{ background.TipoAntecedente.ItemDescr }}</td>
+                                    <td>{{ background.Fecha }}</td>
+                                    <td>{{ background.Detalle }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="submit" class="btn btn-success" (click)="activeBackground()"> Regresar ->
+                        </button>
+                    </div>
+
+                    <!-- Detail Orders -->
+                    <div class="tab-pane" id="detailOrders" role="tabpanel">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th><strong> CÓDIGO </strong></th>
+                                    <th><strong> NOMBRE </strong></th>
+                                    <th><strong> CANTIDAD </strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let order of recordOrder">
+                                    <td>{{ order.ServicioIPS.Codigo }}</td>
+                                    <td>{{ order.ServicioIPS.Nombre }}</td>
+                                    <td>{{ order.Cantidad }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="submit" class="btn btn-success" (click)="activeBackground()"> Regresar ->
+                        </button>
+                    </div>
+
+                    <!-- Detail Management -->
+                    <div class="tab-pane" id="detailManagement" role="tabpanel">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th><strong> TIPO </strong></th>
+                                    <th><strong> NOMBRE </strong></th>
+                                    <th><strong> CANTIDAD </strong></th>
+                                    <th><strong> OBSERVACIÓN </strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let management of recordManagement">
+                                    <ng-container *ngIf="management.TipoPlanManejo.ItemDescr === 'Medicamento'">
+                                        <td>{{ management.TipoPlanManejo.ItemDescr }}</td>
+                                        <td>{{ management.Medicamento.Nombre }}</td>
+                                        <td>{{ management.Cantidad }}</td>
+                                        <td>{{ management.Observacion }}</td>
+                                    </ng-container>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th><strong> TIPO </strong></th>
+                                    <th><strong> OBSERVACIÓN </strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let management of recordManagement">
+                                    <ng-container *ngIf="management.TipoPlanManejo.ItemDescr === 'Indicacion'">
+                                        <td>{{ management.TipoPlanManejo.ItemDescr }}</td>
+                                        <td>{{ management.Observacion }}</td>
+                                    </ng-container>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="submit" class="btn btn-success" (click)="activeBackground()"> Regresar ->
+                        </button>
                     </div>
                 </div>
             </div>
