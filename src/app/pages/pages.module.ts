@@ -33,14 +33,14 @@ import { PagesComponent } from './pages.component';
 
 @NgModule({
   declarations: [
+    PagesComponent,
     DashboardComponent,
     InvoiceComponent,
     DiagnosisComponent, 
     OrdersComponent, 
     BackgroundComponent,
     ManagementComponent, 
-    HcpacientComponent,
-    PagesComponent
+    HcpacientComponent
   ],
   imports: [
     ChartsModule,
@@ -60,6 +60,7 @@ import { PagesComponent } from './pages.component';
     MatTableFilterModule
   ],
   exports: [
+    PagesComponent,
     DashboardComponent,
     InvoiceComponent,
     DiagnosisComponent, 
@@ -67,7 +68,6 @@ import { PagesComponent } from './pages.component';
     BackgroundComponent,
     ManagementComponent, 
     HcpacientComponent,
-    PagesComponent,
     MatTableModule,
     MatFormFieldModule,
     MatPaginatorModule,
