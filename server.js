@@ -10,6 +10,4 @@ app.get('/*', function( req, res ){
 });
 
 // Puerto de escucha
-app.listen( 8080, () => {
-    console.log('Servidor corriendo en el puerto ' + 8080);
-});
+app.listen(process.env.PORT || 8080);
