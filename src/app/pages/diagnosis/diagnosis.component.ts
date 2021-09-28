@@ -126,9 +126,10 @@ export class DiagnosisComponent implements AfterViewInit, OnInit {
 
   getDataSource(id: number): DiagnosisData {
     const diagnosis = this.recordPatient.Diagnosticos[id];
+    const dateDiagnosis = diagnosis.FolioAtencion.FechaAtencion.substring(0, 10) + ' - ' + diagnosis.FolioAtencion.FechaAtencion.substring(11);
     return {
       CodeDiagnosis: diagnosis.Diagnostico.Codigo,
-      DateDiagnosis: diagnosis.FolioAtencion.FechaAtencion,
+      DateDiagnosis: dateDiagnosis,
       Name: diagnosis.Diagnostico.Nombre,
       Hospital: diagnosis.FolioAtencion.IPS.Nombre,
       Diagnosis_Principal: diagnosis.DiagnosticoPrincipal,

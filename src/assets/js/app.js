@@ -15382,6 +15382,7 @@
               value: o
             })
           }
+
         function s(e, t) {
           return Math.pow(e[0] - t[0], 2) + Math.pow(e[1] - t[1], 2) + Math.pow(e[2] - t[2], 2)
         }
@@ -29692,6 +29693,7 @@
             Array.prototype.forEach.call(n.element.querySelectorAll(`[data-${e}]`), (t => u(t, "click", n[e])))
           }));
           if (n.isMobile) return void
+
           function () {
             const e = n.config.enableTime ? n.config.noCalendar ? "time" : "datetime-local" : "date";
             n.mobileInput = Sa("input", n.input.className + " flatpickr-mobile"), n.mobileInput.tabIndex = 1, n.mobileInput.type = e, n.mobileInput.disabled = n.input.disabled, n.mobileInput.required = n.input.required, n.mobileInput.placeholder = n.input.placeholder, n.mobileFormatStr = "datetime-local" === e ? "Y-m-d\\TH:i:S" : "date" === e ? "Y-m-d" : "H:i:S", n.selectedDates.length > 0 && (n.mobileInput.defaultValue = n.mobileInput.value = n.formatDate(n.selectedDates[0], n.mobileFormatStr));

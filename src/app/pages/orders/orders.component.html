@@ -331,9 +331,9 @@
                                 <tr *ngFor="let diagnosis of recordDiagnosis">
                                     <td>{{ diagnosis.Diagnostico.Codigo }}</td>
                                     <td>{{ diagnosis.Diagnostico.Nombre }}</td>
-                                    <td>{{ diagnosis.DiagnosticoPrincipal }}</td>
-                                    <td>{{ diagnosis.DiagnosticoIngreso }}</td>
-                                    <td>{{ diagnosis.DiagnosticoEgreso }}</td>
+                                    <td><mat-checkbox class="example-margin" [checked]="diagnosis.DiagnosticoPrincipal"></mat-checkbox></td>
+                                    <td><mat-checkbox class="example-margin" [checked]="diagnosis.DiagnosticoIngreso"></mat-checkbox></td>
+                                    <td><mat-checkbox class="example-margin" [checked]="diagnosis.DiagnosticoEgreso"></mat-checkbox></td>
                                 </tr>
                             </tbody>
                         </table>

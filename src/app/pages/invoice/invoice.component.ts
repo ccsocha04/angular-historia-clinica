@@ -104,9 +104,10 @@ export class InvoiceComponent implements AfterViewInit, OnInit {
 
   getDataSource(id: number): InvoiceData {
     const invoice = this.recordPatient.Folios[id];
+    const dateAtention = invoice.FechaAtencion.substring(0, 10) + ' - ' + invoice.FechaAtencion.substring(11);
     return {
       TypeAtention: invoice.TipoAtencion.ItemDescr,
-      DateAtention: invoice.FechaAtencion,
+      DateAtention: dateAtention,
       Specialty: invoice.Especialidad.Nombre,
       Hospital: invoice.IPS.Nombre,
       State: invoice.Oid

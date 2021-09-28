@@ -105,9 +105,10 @@ export class OrdersComponent implements AfterViewInit, OnInit {
 
   getDataSource(id: number): OrdersData {
     const orders = this.recordPatient.ServiciosIPS[id];
+    const dateOrders = orders.FolioAtencion.FechaAtencion.substring(0, 10) + ' - ' + orders.FolioAtencion.FechaAtencion.substring(11);
     return {
       CodeOrder: orders.ServicioIPS.Codigo,
-      DateOrder: orders.FolioAtencion.FechaAtencion,
+      DateOrder: dateOrders,
       Name: orders.ServicioIPS.Nombre,
       Amount: orders.Cantidad,
       Hospital: orders.FolioAtencion.IPS.Nombre,

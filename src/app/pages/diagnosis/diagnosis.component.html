@@ -50,7 +50,8 @@
                                     <th style="width:5%;" mat-header-cell *matHeaderCellDef mat-sort-header>
                                         <strong>PRINCIPAL</strong>
                                     </th>
-                                    <td style="width:5%;" mat-cell *matCellDef="let row"> {{ row.Diagnosis_Principal }}
+                                    <td style="width:5%;" mat-cell *matCellDef="let row"> 
+                                        <mat-checkbox class="example-margin"  [checked]="row.Diagnosis_Principal" ></mat-checkbox>
                                     </td>
                                 </ng-container>
 
@@ -59,7 +60,9 @@
                                     <th style="width:5%;" mat-header-cell *matHeaderCellDef mat-sort-header>
                                         <strong>INGRESO</strong>
                                     </th>
-                                    <td style="width:5%;" mat-cell *matCellDef="let row"> {{ row.Diagnosis_Input }}
+                                    <td style="width:5%;" mat-cell *matCellDef="let row"> 
+                                        <mat-checkbox class="example-margin" [checked]="row.Diagnosis_Input"></mat-checkbox>
+                                        
                                     </td>
                                 </ng-container>
 
@@ -68,7 +71,9 @@
                                     <th style="width:5%;" mat-header-cell *matHeaderCellDef mat-sort-header>
                                         <strong>EGRESO</strong>
                                     </th>
-                                    <td style="width:5%;" mat-cell *matCellDef="let row"> {{ row.Diagnosis_Output }}
+                                    <td style="width:5%;" mat-cell *matCellDef="let row">
+                                        <mat-checkbox class="example-margin" [checked]="row.Diagnosis_Output"></mat-checkbox>
+                                        
                                     </td>
                                 </ng-container>
 
@@ -365,9 +370,9 @@
                                 <tr *ngFor="let diagnosis of recordDiagnosis">
                                     <td>{{ diagnosis.Diagnostico.Codigo }}</td>
                                     <td>{{ diagnosis.Diagnostico.Nombre }}</td>
-                                    <td>{{ diagnosis.DiagnosticoPrincipal }}</td>
-                                    <td>{{ diagnosis.DiagnosticoIngreso }}</td>
-                                    <td>{{ diagnosis.DiagnosticoEgreso }}</td>
+                                    <td><mat-checkbox class="example-margin" [checked]="diagnosis.DiagnosticoPrincipal"></mat-checkbox></td>
+                                    <td><mat-checkbox class="example-margin" [checked]="diagnosis.DiagnosticoIngreso"></mat-checkbox></td>
+                                    <td><mat-checkbox class="example-margin" [checked]="diagnosis.DiagnosticoEgreso"></mat-checkbox></td>
                                 </tr>
                             </tbody>
                         </table>

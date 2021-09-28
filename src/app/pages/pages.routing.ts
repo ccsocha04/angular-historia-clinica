@@ -17,7 +17,7 @@ const routes: Routes = [
     {
         path: 'dashboard',
         component: PagesComponent,
-        canActivate: [ AuthGuard ],
+        // canActivate: [ AuthGuard ],
         children: [
             { path: '', component: DashboardComponent, data: {titulo: 'Paciente', descripcion: 'Dashboard' } },
         ]
@@ -25,6 +25,7 @@ const routes: Routes = [
     {
         path: 'invoice',
         component: PagesComponent,
+        // canActivate: [ AuthGuard ],
         children: [
             { path: '', component: InvoiceComponent, data: {titulo: 'Folios de atención', descripcion: 'Paciente' } },
         ]
@@ -32,6 +33,7 @@ const routes: Routes = [
     {
         path: 'diagnosis',
         component: PagesComponent,
+        // canActivate: [ AuthGuard ],
         children: [
             { path: '', component: DiagnosisComponent, data: {titulo: 'Diagnósticos', descripcion: 'Paciente' } },
         ]
@@ -39,6 +41,7 @@ const routes: Routes = [
     {
         path: 'background',
         component: PagesComponent,
+        // canActivate: [ AuthGuard ],
         children: [
             { path: '', component: BackgroundComponent, data: {titulo: 'Antecedentes', descripcion: 'Paciente' } }
         ]
@@ -46,6 +49,7 @@ const routes: Routes = [
     {
         path: 'orders',
         component: PagesComponent,
+        // canActivate: [ AuthGuard ],
         children: [
             { path: '', component: OrdersComponent, data: {titulo: 'Ordenes', descripcion: 'Paciente' } }
         ]
@@ -53,6 +57,7 @@ const routes: Routes = [
     {
         path: 'management',
         component: PagesComponent,
+        // canActivate: [ AuthGuard ],
         children: [
             { path: '', component: ManagementComponent, data: {titulo: 'Plan de Manejo', descripcion: 'Paciente' } }
         ]

@@ -20,7 +20,7 @@ export class BreadcrumbsComponent implements OnDestroy {
                         .subscribe( ({ titulo, descripcion }) => {
                           this.title = titulo;
                           this.description = descripcion;
-                          document.title = `AdminPro - ${ titulo }`;
+                          document.title = `Historia Clínica - ${ titulo }`;
                         })
   }
   ngOnDestroy(): void {

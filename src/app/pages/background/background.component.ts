@@ -104,9 +104,10 @@ export class BackgroundComponent implements AfterViewInit, OnInit {
 
   getDataSource(id: number): BackgroundData {
     const background = this.recordPatient.Antecedentes[id];
+    const dateBackground = background.Fecha.substring(0, 10) + ' - ' + background.Fecha.substring(11)
     return {
       TypeBackground: background.TipoAntecedente.ItemDescr,
-      DateBackground: background.Fecha,
+      DateBackground: dateBackground,
       Detail: background.Detalle,
       Hospital: background.FolioAtencion.IPS.Nombre,
       State: background.FolioAtencion.Oid

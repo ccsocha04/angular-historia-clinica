@@ -128,9 +128,10 @@ export class ManagementComponent implements AfterViewInit, OnInit {
 
   getDataSourceIndication(id: number): IndicationData {
     const management = this.recordPatient.PlanManejo[id];
+    const dateManagement = management.FolioAtencion.FechaAtencion.substring(0, 10) + ' - ' + management.FolioAtencion.FechaAtencion.substring(11);
     if (management.TipoPlanManejo.ItemDescr === 'Indicacion') {
       return {
-        DateIndication: management.FolioAtencion.FechaAtencion,
+        DateIndication: dateManagement,
         Hospital: management.FolioAtencion.IPS.Nombre,
         Observations: management.Observacion,
         State: management.FolioAtencion.Oid
