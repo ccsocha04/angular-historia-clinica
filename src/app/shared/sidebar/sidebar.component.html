@@ -1,53 +1,62 @@
 <nav id="sidebar" class="sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="dashboard">
-            <span class="align-middle">Historia Clínica</span>
+        <a class="sidebar-brand" href="/HistoriaClinica/DatosPaciente">
+            <span class="sidebar-brand-text align-middle">
+                <em class="align-middle" data-feather="book-open"></em>
+                &nbsp;Historia Clínica
+            </span>
         </a>
-
-
         <ul class="sidebar-nav">
             <li class="sidebar-header">
-                Paginas
+                Páginas
             </li>
-            <li class="sidebar-item active">
+            <li class="sidebar-item" routerLinkActive="active" routerLinkActiveOptions="{ exact: true }">
                 <a href="#dashboard" data-bs-toggle="collapse" class="sidebar-link collapsed">
                     <em class="align-middle" data-feather="sliders"></em> 
-                        <span class="align-middle">Dashboard</span>
+                    <span class="align-middle">Reportes</span>
                 </a>
                 <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse show" data-bs-parent="#sidebar">
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="dashboard">Datos paciente</a></li>
+                    <li class="sidebar-item" routerLinkActive="active">
+                        <a class="sidebar-link" routerLink="/HistoriaClinica/DatosPaciente" >Datos paciente</a></li>
                 </ul>
             </li>
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="invoice">
+            <li class="sidebar-item" routerLinkActive="active">
+                <a class="sidebar-link" routerLink="FoliosAtencion" >
                     <em class="align-middle" data-feather="activity"></em>
                     <span class="align-middle">Folios de atención</span>
                 </a>
             </li>
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="diagnosis">
+            <li class="sidebar-item" routerLinkActive="active">
+                <a class="sidebar-link" routerLink="Diagnosticos">
                     <em class="align-middle" data-feather="check-square"></em>
                     <span class="align-middle">Diagnósticos</span>
                 </a>
             </li>
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="background">
+            <li class="sidebar-item" routerLinkActive="active">
+                <a class="sidebar-link" routerLink="Antecedentes">
                     <em class="align-middle" data-feather="eye"></em>
                     <span class="align-middle">Antecendentes</span>
                 </a>
             </li>
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="orders">
+            <li class="sidebar-item" routerLinkActive="active">
+                <a class="sidebar-link" routerLink="Ordenes">
                     <em class="align-middle" data-feather="clipboard"></em>
                     <span class="align-middle">Ordenes</span>
                 </a>
             </li>
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="management">
-                    <em class="align-middle" data-feather="heart"></em>
-                    <span class="align-middle">Plan de manejo</span>
+            <li class="sidebar-item" routerLinkActive="active" routerLinkActiveOptions="{ exact: true }">
+                <a href="#management" data-bs-toggle="collapse" class="sidebar-link collapsed">
+                    <em class="align-middle" data-feather="heart"></em> 
+                        <span class="align-middle">Plan de manejo</span>
                 </a>
+                <ul id="management" class="sidebar-dropdown list-unstyled collapse show" data-bs-parent="#sidebar">
+                    <li class="sidebar-item" routerLinkActive="active">
+                        <a class="sidebar-link" routerLink="PlanManejo/Medicamentos" >Medicamentos</a>
+                    </li>
+                    <li class="sidebar-item" routerLinkActive="active">
+                        <a class="sidebar-link" routerLink="PlanManejo/Indicaciones" >Indicaciones</a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>

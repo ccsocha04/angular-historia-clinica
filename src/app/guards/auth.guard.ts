@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 
@@ -9,8 +9,10 @@ import { UserService } from '../services/user.service'
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private userService: UserService,
-    private router: Router) { }
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private ngZone: NgZone) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -19,7 +21,9 @@ export class AuthGuard implements CanActivate {
       .pipe(
         tap(resp => {
           if (!resp) {
-            this.router.navigateByUrl('/login');
+            this.ngZone.run(() => {
+              this.router.navigateByUrl('/login'); 
+            })
           }
         })
       );

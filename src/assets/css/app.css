@@ -475,7 +475,8 @@ progress {
 
 .img-fluid,.img-thumbnail {
     max-width: 100%;
-    height: auto
+    height: auto;
+    /* padding: 1.0rem .25rem; */
 }
 
 .img-thumbnail {
@@ -4235,8 +4236,8 @@ textarea.form-control-lg {
 }
 
 .navbar-expand .navbar-nav .nav-link {
-    padding-right: .5rem;
-    padding-left: .5rem
+    padding-right: 1.0rem;
+    padding-left: 1.0rem
 }
 
 .navbar-expand .navbar-nav-scroll {
@@ -14837,7 +14838,7 @@ body[data-theme=colored] .sidebar-dropdown .sidebar-item.active .sidebar-link,bo
 .sidebar-brand {
     font-weight: 600;
     font-size: 1.15rem;
-    padding: 1.15rem 1.5rem;
+    padding: 1.6rem 1.6rem;
     display: block;
     color: #f8f9fa
 }

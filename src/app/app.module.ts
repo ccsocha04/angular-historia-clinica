@@ -7,6 +7,8 @@ import { AuthModule } from './auth/auth.module';
 import { PagesModule } from './pages/pages.module';
 import { ComponentsModule } from './components/components.module';
 
+import { LoadScriptsService } from './services/load-scripts.service'; 
+
 import { AppComponent } from './app.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
@@ -24,7 +26,9 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     ComponentsModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    LoadScriptsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

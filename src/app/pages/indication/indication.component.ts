@@ -5,40 +5,38 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableFilter } from 'mat-table-filter';
 
-import { ManagementData } from '../../interfaces/management-data.interface';
+import { IndicationData } from 'src/app/interfaces/indication-data.interface';
 
 
-export class ManagementClass {
-  CodeManagement: string;
-  DateManagement: string;
-  Name: string;
-  Amount: number;
+export class IndicationClass {
+  DateIndication: string;
   Hospital: string;
   Observations: string;
   State: number
 }
 
-let MANAGEMENT_INFORMATION: ManagementClass[] = []
+let INDICATION_INFORMATION: IndicationClass[] = []
 
 @Component({
-  selector: 'app-management',
-  templateUrl: './management.component.html',
-  styles: [
+  selector: 'app-indication',
+  templateUrl: './indication.component.html',
+  styleUrls: [
+
   ]
 })
-export class ManagementComponent implements AfterViewInit, OnInit {
+export class IndicationComponent implements OnInit {
 
   recordPatient = JSON.parse(localStorage.getItem('recordPatient'));
 
-  filterEntity: ManagementClass;
+  filterEntity: IndicationClass;;
   filterType: MatTableFilter;
 
   // Material Table
-  displayedColumns: string[] = ['CodeManagement', 'DateManagement', 'Name', 'Amount', 'Hospital', 'Observations', 'State'];
-  dataSource: MatTableDataSource<ManagementData>;
+  displayedColumns: string[] = ['DateIndication', 'Hospital', 'Observations', 'State'];
+  dataSource: MatTableDataSource<IndicationData>;
 
-  dataTableManagement = true;
-  dataManagement = false;
+  dataTableIndication = true;
+  dataIndication = false;
 
   recordInvoice = [];
   recordDiagnosis = [];
@@ -49,17 +47,17 @@ export class ManagementComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
+  constructor() { 
     // DataSource
-    const dataSource = Array.from({ length: this.recordPatient.PlanManejo.filter(element => element.TipoPlanManejo.ItemDescr == "Medicamento").length }, (_, k) => this.getDataSource(k));
-    MANAGEMENT_INFORMATION = dataSource;
+    const dataSource = Array.from({ length: this.recordPatient.PlanManejo.filter(element => element.TipoPlanManejo.ItemDescr == "Indicacion").length }, (_, k) => this.getDataSource(k));
+    INDICATION_INFORMATION = dataSource;
   }
 
   ngOnInit(): void {
-    this.filterEntity = new ManagementClass();
+    this.filterEntity = new IndicationClass();
     this.filterType = MatTableFilter.ANYWHERE;
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(MANAGEMENT_INFORMATION);
+    this.dataSource = new MatTableDataSource(INDICATION_INFORMATION);
   }
 
   ngAfterViewInit(): void {
@@ -67,7 +65,7 @@ export class ManagementComponent implements AfterViewInit, OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  detailManagement(id: number) {
+  detailIndication(id: number) {
     this.recordPatient.Folios.forEach(element => {
       if (element.Oid === id) {
         this.recordInvoice = element;
@@ -93,27 +91,24 @@ export class ManagementComponent implements AfterViewInit, OnInit {
         this.recordManagement.push(element);
       }
     });
-    this.dataTableManagement = false;
-    this.dataManagement = true;
+    this.dataTableIndication = false;
+    this.dataIndication = true;
   }
 
-  activeManagement() {
+  activeIndication() {
     // Refresh actual page
     location.reload();
-    this.dataManagement = false;
-    this.dataTableManagement = true;
+    this.dataIndication = false;
+    this.dataTableIndication = true;
   }
 
-  getDataSource(id: number): ManagementData {
-    const management = this.recordPatient.PlanManejo.filter(element => element.TipoPlanManejo.ItemDescr == "Medicamento")[id];
+  getDataSource(id: number): IndicationData { 
+    const indication = this.recordPatient.PlanManejo.filter(element => element.TipoPlanManejo.ItemDescr == "Indicacion")[id];
     return {
-      CodeManagement: management.Medicamento.Codigo,
-      DateManagement: management.FolioAtencion.FechaAtencion,
-      Name: management.Medicamento.Nombre,
-      Amount: management.Cantidad,
-      Hospital: management.FolioAtencion.IPS.Nombre,
-      Observations: management.Observacion,
-      State: management.FolioAtencion.Oid
+      DateIndication: indication.FolioAtencion.FechaAtencion,
+      Hospital: indication.FolioAtencion.IPS.Nombre,
+      Observations: indication.Observacion,
+      State: indication.FolioAtencion.Oid
     }
   }
 

@@ -33,13 +33,6 @@ export class DashboardComponent {
   public polarAreaLegend = true;
   public polarAreaChartType: ChartType = 'polarArea';
 
-  // PolarArea - Área de servicio
-  // public serviceAreaChartLabels: Label[] = this.getLabels('AreaServicio');
-  // public serviceAreaChartData: SingleDataSet = this.getDataSet();
-  // public serviceAreaChartColors: Array<any> = [{ backgroundColor: this.backgroundOptions }];
-  // public serviceAreaLegend = true;
-  // public serviceAreaChartType: ChartType = 'polarArea';
-
   // Doughnut - Atención por año
   public doughnutChartLabels: Label[] = this.getLabels('Atencion');
   public doughnutChartData: MultiDataSet = [
@@ -134,6 +127,7 @@ export class DashboardComponent {
     
     this.dataLabels = [...new Set(chartLabels)];
     this.getValues(chartLabels);
+
     return this.dataLabels.sort();
   }
 

@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableFilterModule } from 'mat-table-filter';
+import { MatIconModule } from '@angular/material/icon';
 
 // Modulos
 import { SharedModule } from '../shared/shared.module';
@@ -27,8 +28,10 @@ import { DiagnosisComponent } from './diagnosis/diagnosis.component';
 import { BackgroundComponent } from './background/background.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ManagementComponent } from './management/management.component';
+import { IndicationComponent } from './indication/indication.component';
 import { HcpacientComponent } from './hcpacient/hcpacient.component';
 import { PagesComponent } from './pages.component';
+import { PagenotfoundComponent } from '../pagenotfound/pagenotfound.component';
 
 
 @NgModule({
@@ -39,7 +42,8 @@ import { PagesComponent } from './pages.component';
     DiagnosisComponent, 
     OrdersComponent, 
     BackgroundComponent,
-    ManagementComponent, 
+    ManagementComponent,
+    IndicationComponent, 
     HcpacientComponent
   ],
   imports: [
@@ -57,7 +61,8 @@ import { PagesComponent } from './pages.component';
     MatTabsModule,
     MatCheckboxModule,
     MatSelectModule,
-    MatTableFilterModule
+    MatTableFilterModule,
+    MatIconModule
   ],
   exports: [
     PagesComponent,
@@ -66,7 +71,8 @@ import { PagesComponent } from './pages.component';
     DiagnosisComponent, 
     OrdersComponent, 
     BackgroundComponent,
-    ManagementComponent, 
+    ManagementComponent,
+    IndicationComponent, 
     HcpacientComponent,
     MatTableModule,
     MatFormFieldModule,
@@ -76,7 +82,8 @@ import { PagesComponent } from './pages.component';
     MatTabsModule,
     MatCheckboxModule,
     MatSelectModule,
-    MatTableFilterModule
+    MatTableFilterModule,
+    MatIconModule
   ]
 })
 

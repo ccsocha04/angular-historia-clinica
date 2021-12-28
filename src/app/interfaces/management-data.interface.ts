@@ -10,10 +10,3 @@ export interface ManagementData {
     Observations: string;
     State: number
 }
-
-export interface IndicationData {
-    DateIndication: string;
-    Hospital: string;
-    Observations: string;
-    State: number
-}

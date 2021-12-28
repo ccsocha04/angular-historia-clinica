@@ -6,6 +6,11 @@
 
 } */
 
+.login {
+  background-image: url(../../../assets/img/background/background_sign_in_1.png);
+  background-size: cover
+}
+
 .modal {
   background-color: rgba(0, 0, 0, .8);
   position: fixed;

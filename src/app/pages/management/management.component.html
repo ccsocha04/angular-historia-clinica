@@ -4,24 +4,24 @@
     <div class="row" *ngIf="dataTableManagement">
         <div class="col-md-12 col-xl-12">
             <div class="card flex-fill">
-                <div class="mat-elevation-z8">
+                <div class="example-container mat-elevation-z8">
 
                     <div class="col-md-12 col-xl-12">
-                        <table class="table table-hover my-0" mat-table matTableFilter 
-                            [exampleEntity]="filterEntity" 
-                            [filterType]="filterType"
-                            [dataSource]="dataSource" matSort>
+                        <table class="table table-hover my-0" mat-table matTableFilter [exampleEntity]="filterEntity"
+                            [filterType]="filterType" [dataSource]="dataSource" matSort>
                             <!-- CodeManagement Column -->
                             <ng-container matColumnDef="CodeManagement">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                    <strong>CÓDIGO</strong> </th>
+                                    <strong>CÓDIGO</strong>
+                                </th>
                                 <td mat-cell *matCellDef="let row"> {{ row.CodeManagement }} </td>
                             </ng-container>
 
                             <!-- DateManagement Column -->
                             <ng-container matColumnDef="DateManagement">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                    <strong>FECHA</strong> </th>
+                                    <strong>FECHA</strong>
+                                </th>
                                 <td mat-cell *matCellDef="let row"> {{ row.DateManagement }} </td>
                             </ng-container>
 
@@ -34,8 +34,9 @@
                             <!-- Amount Column -->
                             <ng-container matColumnDef="Amount">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                    <strong>CANTIDAD</strong> </th>
-                                <td mat-cell *matCellDef="let row"> {{row.Amount}} </td>
+                                    <strong>CANTIDAD</strong>
+                                </th>
+                                <td style="text-align: center;" mat-cell *matCellDef="let row"> {{row.Amount}} </td>
                             </ng-container>
 
                             <!-- Hospital Column -->
@@ -57,8 +58,14 @@
                                     <strong>ESTADO</strong>
                                 </th>
                                 <td mat-cell *matCellDef="let row">
-                                    <button class="btn btn-success" (click)="detailManagement(row.State)">
-                                        Ver Folio->
+                                    <button class="btn btn-success" data-toggle="tooltip" data-placement="right"
+                                        title="Ver Folio" (click)="detailManagement(row.State)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
                                     </button>
                                 </td>
                             </ng-container>
@@ -67,8 +74,8 @@
                             <ng-container matColumnDef="filterCodeManagement">
                                 <th mat-header-cell *matHeaderCellDef>
                                     <mat-form-field appearance="fill">
-                                        <input matInput [(ngModel)]="filterEntity.CodeManagement"
-                                            placeholder="Ejemplo. 53560-5" #input>
+                                        <input matInput [(ngModel)]="filterEntity.CodeManagement" placeholder="53560-5"
+                                            #input>
                                     </mat-form-field>
                                 </th>
                             </ng-container>
@@ -78,7 +85,7 @@
                                 <th mat-header-cell *matHeaderCellDef>
                                     <mat-form-field appearance="fill">
                                         <input matInput [(ngModel)]="filterEntity.DateManagement"
-                                            placeholder="Ejemplo. 12/08/2021" #input>
+                                            placeholder="2021-08-12" #input>
                                     </mat-form-field>
                                 </th>
                             </ng-container>
@@ -87,8 +94,7 @@
                             <ng-container matColumnDef="filterName">
                                 <th mat-header-cell *matHeaderCellDef>
                                     <mat-form-field appearance="fill">
-                                        <input matInput [(ngModel)]="filterEntity.Name"
-                                            placeholder="Ejemplo. Ranitidina" #input>
+                                        <input matInput [(ngModel)]="filterEntity.Name" placeholder="Ranitidina" #input>
                                     </mat-form-field>
                                 </th>
                             </ng-container>
@@ -97,8 +103,8 @@
                             <ng-container matColumnDef="filterAmount">
                                 <th mat-header-cell *matHeaderCellDef>
                                     <mat-form-field appearance="fill">
-                                        <input matInput [(ngModel)]="filterEntity.Amount"
-                                            placeholder="Ejemplo. 1" #input>
+                                        <input matInput [(ngModel)]="filterEntity.Amount" style="text-align: center;"
+                                            placeholder="1" #input>
                                     </mat-form-field>
                                 </th>
                             </ng-container>
@@ -108,7 +114,7 @@
                                 <th mat-header-cell *matHeaderCellDef>
                                     <mat-form-field appearance="fill">
                                         <input matInput [(ngModel)]="filterEntity.Hospital"
-                                            placeholder="Ejemplo. Hospital San Rafael" #input>
+                                            placeholder="Hospital San Rafael" #input>
                                     </mat-form-field>
                                 </th>
                             </ng-container>
@@ -323,7 +329,14 @@
                                 </div>
                             </div>
                         </form>
-                        <button type="submit" class="btn btn-success" (click)="activeManagement()"> Regresar ->
+                        <button class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Regresar"
+                            (click)="activeManagement()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-skip-back">
+                                <polygon points="19 20 9 12 19 4 19 20"></polygon>
+                                <line x1="5" y1="19" x2="5" y2="5"></line>
+                            </svg>
                         </button>
                     </div>
 
@@ -343,13 +356,29 @@
                                 <tr *ngFor="let diagnosis of recordDiagnosis">
                                     <td>{{ diagnosis.Diagnostico.Codigo }}</td>
                                     <td>{{ diagnosis.Diagnostico.Nombre }}</td>
-                                    <td><mat-checkbox class="example-margin" [checked]="diagnosis.DiagnosticoPrincipal"></mat-checkbox></td>
-                                    <td><mat-checkbox class="example-margin" [checked]="diagnosis.DiagnosticoIngreso"></mat-checkbox></td>
-                                    <td><mat-checkbox class="example-margin" [checked]="diagnosis.DiagnosticoEgreso"></mat-checkbox></td>
+                                    <td>
+                                        <mat-checkbox class="example-margin" [checked]="diagnosis.DiagnosticoPrincipal"
+                                            [disabled]="true"></mat-checkbox>
+                                    </td>
+                                    <td>
+                                        <mat-checkbox class="example-margin" [checked]="diagnosis.DiagnosticoIngreso"
+                                            [disabled]="true"></mat-checkbox>
+                                    </td>
+                                    <td>
+                                        <mat-checkbox class="example-margin" [checked]="diagnosis.DiagnosticoEgreso"
+                                            [disabled]="true"></mat-checkbox>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <button type="submit" class="btn btn-success" (click)="activeManagement()"> Regresar ->
+                        <button class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Regresar"
+                            (click)="activeManagement()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-skip-back">
+                                <polygon points="19 20 9 12 19 4 19 20"></polygon>
+                                <line x1="5" y1="19" x2="5" y2="5"></line>
+                            </svg>
                         </button>
                     </div>
 
@@ -371,7 +400,14 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <button type="submit" class="btn btn-success" (click)="activeManagement()"> Regresar ->
+                        <button class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Regresar"
+                            (click)="activeManagement()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-skip-back">
+                                <polygon points="19 20 9 12 19 4 19 20"></polygon>
+                                <line x1="5" y1="19" x2="5" y2="5"></line>
+                            </svg>
                         </button>
                     </div>
 
@@ -393,7 +429,14 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <button type="submit" class="btn btn-success" (click)="activeManagement()"> Regresar ->
+                        <button class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Regresar"
+                            (click)="activeManagement()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-skip-back">
+                                <polygon points="19 20 9 12 19 4 19 20"></polygon>
+                                <line x1="5" y1="19" x2="5" y2="5"></line>
+                            </svg>
                         </button>
                     </div>
 
@@ -435,7 +478,14 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <button type="submit" class="btn btn-success" (click)="activeManagement()"> Regresar ->
+                        <button class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Regresar"
+                            (click)="activeManagement()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-skip-back">
+                                <polygon points="19 20 9 12 19 4 19 20"></polygon>
+                                <line x1="5" y1="19" x2="5" y2="5"></line>
+                            </svg>
                         </button>
                     </div>
                 </div>

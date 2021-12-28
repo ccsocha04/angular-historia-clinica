@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { catchError, map, tap } from 'rxjs/operators';
+import { map, tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { LoginForm } from '../interfaces/login-form.interface';
@@ -64,6 +64,13 @@ export class UserService {
     );
   }
 
+  logoutUser() {
+    localStorage.removeItem('recordPatient');
+    localStorage.removeItem('UserName');
+    localStorage.removeItem('type_token');
+    localStorage.removeItem('access_token');
+  }
+
   searchPatient(formData: SearchForm) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -76,10 +83,12 @@ export class UserService {
         if (localStorage.getItem('recordPatient')) {
           localStorage.removeItem('recordPatient');
         }
+        if (resp.Oid == -1) {
+          throw resp.console.error();
+        }
         localStorage.setItem('recordPatient', JSON.stringify(resp));
-      }),
-      map( resp => true ),
-      catchError( error => of(false) )
+
+      })
     );
   }
 

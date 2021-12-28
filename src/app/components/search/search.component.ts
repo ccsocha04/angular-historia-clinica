@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 
@@ -9,8 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styles: [
-  ]
+  styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
 
@@ -24,7 +23,8 @@ export class SearchComponent {
   constructor( 
     private router: Router,
     private fb: FormBuilder,
-    private userService: UserService) { }
+    private userService: UserService,
+    private ngZone: NgZone) { }
 
   search() {
     
@@ -46,9 +46,11 @@ export class SearchComponent {
 
     this.userService.searchPatient( recordQuery )
       .subscribe( resp => {
-        this.router.navigateByUrl('/');
+        this.ngZone.run(() => {
+          this.router.navigateByUrl('/HistoriaClinica/DatosPaciente');
+        })
       }, (err) => {
-        Swal.fire('Error', err.error ='Usuario no registrado', 'error');
+        Swal.fire('Error', err.error ='Paciente no registrado', 'error');
       });
 
   }

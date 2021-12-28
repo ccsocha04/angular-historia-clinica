@@ -10,66 +10,26 @@ import { DiagnosisComponent } from './diagnosis/diagnosis.component';
 import { BackgroundComponent } from './background/background.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ManagementComponent } from './management/management.component';
+import { IndicationComponent } from './indication/indication.component';
 import { HcpacientComponent } from './hcpacient/hcpacient.component';
 
 
 const routes: Routes = [
     {
-        path: 'dashboard',
+        path: 'HistoriaClinica',
         component: PagesComponent,
         // canActivate: [ AuthGuard ],
         children: [
-            { path: '', component: DashboardComponent, data: {titulo: 'Paciente', descripcion: 'Dashboard' } },
+            { path: 'DatosPaciente', component: DashboardComponent, data: {titulo: 'Reporte del paciente', descripcion: '' } },
+            { path: 'FoliosAtencion', component: InvoiceComponent, data: {titulo: 'Folios de atención', descripcion: '' } },
+            { path: 'Diagnosticos', component: DiagnosisComponent, data: {titulo: 'Diagnósticos', descripcion: '' } },
+            { path: 'Antecedentes', component: BackgroundComponent, data: {titulo: 'Antecedentes', descripcion: '' } },
+            { path: 'Ordenes', component: OrdersComponent, data: {titulo: 'Ordenes', descripcion: '' } },
+            { path: 'PlanManejo/Medicamentos', component: ManagementComponent, data: {titulo: 'Medicamentos', descripcion: '' } },
+            { path: 'PlanManejo/Indicaciones', component: IndicationComponent, data: {titulo: 'Indicaciones', descripcion: '' } },
+            { path: 'HCPaciente.html', component: HcpacientComponent, data: {titulo: 'Integración HIS - Historia Clínica', descripcion: '' } }
         ]
-    },
-    {
-        path: 'invoice',
-        component: PagesComponent,
-        // canActivate: [ AuthGuard ],
-        children: [
-            { path: '', component: InvoiceComponent, data: {titulo: 'Folios de atención', descripcion: 'Paciente' } },
-        ]
-    },
-    {
-        path: 'diagnosis',
-        component: PagesComponent,
-        // canActivate: [ AuthGuard ],
-        children: [
-            { path: '', component: DiagnosisComponent, data: {titulo: 'Diagnósticos', descripcion: 'Paciente' } },
-        ]
-    },
-    {
-        path: 'background',
-        component: PagesComponent,
-        // canActivate: [ AuthGuard ],
-        children: [
-            { path: '', component: BackgroundComponent, data: {titulo: 'Antecedentes', descripcion: 'Paciente' } }
-        ]
-    },
-    {
-        path: 'orders',
-        component: PagesComponent,
-        // canActivate: [ AuthGuard ],
-        children: [
-            { path: '', component: OrdersComponent, data: {titulo: 'Ordenes', descripcion: 'Paciente' } }
-        ]
-    },
-    {
-        path: 'management',
-        component: PagesComponent,
-        // canActivate: [ AuthGuard ],
-        children: [
-            { path: '', component: ManagementComponent, data: {titulo: 'Plan de Manejo', descripcion: 'Paciente' } }
-        ]
-    },
-    {
-        path: 'HCPaciente',
-        component: PagesComponent,
-        children: [
-            { path: '', component: HcpacientComponent, data: {titulo: 'Integración HIS - Historia Clínica', descripcion: 'Paciente' } }
-        ]
-    },
-
+    }
 ];
 
 @NgModule({

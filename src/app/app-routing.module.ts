@@ -9,13 +9,13 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/HistoriaClinica/DatosPaciente', pathMatch: 'full' },
   { path: '**', component: PagenotfoundComponent }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot( routes ),
+    RouterModule.forRoot( routes, { useHash: false } ),
     AuthRoutingModule,
     PagesRoutingModule,
     ComponentsRoutingModule

@@ -1,7 +1,7 @@
 <div class="container-fluid p-0">
 
     <!-- DataTable -->
-    <div class="row" *ngIf="dataTableOrders">
+    <div class="row" *ngIf="dataTableIndication">
         <div class="col-md-12 col-xl-12">
             <div class="card flex-fill">
                 <div class="example-container mat-elevation-z8">
@@ -9,34 +9,13 @@
                     <div class="col-md-12 col-xl-12">
                         <table class="table table-hover my-0" mat-table matTableFilter [exampleEntity]="filterEntity"
                             [filterType]="filterType" [dataSource]="dataSource" matSort>
-                            <!-- CodeOrder Column -->
-                            <ng-container matColumnDef="CodeOrder">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                    <strong>CÓDIGO</strong>
-                                </th>
-                                <td mat-cell *matCellDef="let row"> {{ row.CodeOrder }} </td>
-                            </ng-container>
-
-                            <!-- DateOrder Column -->
-                            <ng-container matColumnDef="DateOrder">
+                            
+                            <!-- DateIndication Column -->
+                            <ng-container matColumnDef="DateIndication">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                                     <strong>FECHA</strong>
                                 </th>
-                                <td mat-cell *matCellDef="let row"> {{ row.DateOrder }} </td>
-                            </ng-container>
-
-                            <!-- Name Column -->
-                            <ng-container matColumnDef="Name">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header> <strong>NOMBRE</strong> </th>
-                                <td mat-cell *matCellDef="let row"> {{row.Name}} </td>
-                            </ng-container>
-
-                            <!-- Amount Column -->
-                            <ng-container matColumnDef="Amount">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                    <strong>CANTIDAD</strong>
-                                </th>
-                                <td style="text-align: center;" mat-cell *matCellDef="let row"> {{row.Amount}} </td>
+                                <td mat-cell *matCellDef="let row"> {{ row.DateIndication }} </td>
                             </ng-container>
 
                             <!-- Hospital Column -->
@@ -45,14 +24,21 @@
                                 <td mat-cell *matCellDef="let row"> {{row.Hospital}} </td>
                             </ng-container>
 
+                            <!-- Observations Column -->
+                            <ng-container matColumnDef="Observations">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> <strong>OBSERVACIONES</strong>
+                                </th>
+                                <td mat-cell *matCellDef="let row"> {{row.Observations}} </td>
+                            </ng-container>
+
                             <!-- State Column -->
                             <ng-container matColumnDef="State">
-                                <th style="width: 12%;" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
                                     <strong>ESTADO</strong>
                                 </th>
-                                <td style="width: 12%;" mat-cell *matCellDef="let row">
+                                <td mat-cell *matCellDef="let row">
                                     <button class="btn btn-success" data-toggle="tooltip" data-placement="right"
-                                        title="Ver Folio" (click)="detailOrders(row.State)">
+                                        title="Ver Folio" (click)="detailIndication(row.State)">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye">
@@ -63,42 +49,12 @@
                                 </td>
                             </ng-container>
 
-                            <!-- CodeOrder Column -->
-                            <ng-container matColumnDef="filterCodeOrder">
+                            <!-- DateIndication Column -->
+                            <ng-container matColumnDef="filterDateIndication">
                                 <th mat-header-cell *matHeaderCellDef>
                                     <mat-form-field appearance="fill">
-                                        <input matInput [(ngModel)]="filterEntity.CodeOrder" placeholder="907004"
-                                            #input>
-                                    </mat-form-field>
-                                </th>
-                            </ng-container>
-
-                            <!-- DateOrder Column -->
-                            <ng-container matColumnDef="filterDateOrder">
-                                <th mat-header-cell *matHeaderCellDef>
-                                    <mat-form-field appearance="fill">
-                                        <input matInput [(ngModel)]="filterEntity.DateOrder" placeholder="2021-08-12"
-                                            #input>
-                                    </mat-form-field>
-                                </th>
-                            </ng-container>
-
-                            <!-- Name Column -->
-                            <ng-container matColumnDef="filterName">
-                                <th mat-header-cell *matHeaderCellDef>
-                                    <mat-form-field appearance="fill">
-                                        <input matInput [(ngModel)]="filterEntity.Name" placeholder="Hematocrito"
-                                            #input>
-                                    </mat-form-field>
-                                </th>
-                            </ng-container>
-
-                            <!-- Amount Column -->
-                            <ng-container matColumnDef="filterAmount">
-                                <th mat-header-cell *matHeaderCellDef>
-                                    <mat-form-field appearance="fill">
-                                        <input matInput [(ngModel)]="filterEntity.Amount" style="text-align: center;"
-                                            placeholder="1" #input>
+                                        <input matInput [(ngModel)]="filterEntity.DateIndication"
+                                            placeholder="2021-08-12" #input>
                                     </mat-form-field>
                                 </th>
                             </ng-container>
@@ -113,23 +69,28 @@
                                 </th>
                             </ng-container>
 
+                            <!-- Observations Column -->
+                            <ng-container matColumnDef="filterObservations">
+                                <th mat-header-cell *matHeaderCellDef></th>
+                            </ng-container>
+
                             <!-- State Column -->
                             <ng-container matColumnDef="filterState">
-                                <th style="width: 12%;" mat-header-cell *matHeaderCellDef></th>
+                                <th mat-header-cell *matHeaderCellDef></th>
                             </ng-container>
 
                             <tr mat-header-row *matHeaderRowDef="displayedColumns" class="example-first-header-row">
                             </tr>
                             <tr mat-header-row
-                                *matHeaderRowDef="['filterCodeOrder', 'filterDateOrder', 'filterName', 'filterAmount', 'filterHospital', 'filterState']"
+                                *matHeaderRowDef="['filterDateIndication', 'filterHospital', 'filterObservations', 'filterState']"
                                 class="example-second-header-row">
                             </tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
                             <!-- Row shown when there is no matching data. -->
                             <!-- <tr class="mat-row" *matNoDataRow>
-                                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-                            </tr> -->
+                                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                                </tr> -->
                         </table>
 
                         <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" aria-label="Select page of users">
@@ -141,8 +102,8 @@
         </div>
     </div>
 
-    <!-- Detail Orders -->
-    <div class="row" *ngIf="dataOrders">
+    <!-- Detail Invoice -->
+    <div class="row" *ngIf="dataIndication">
         <div class="col-12 col-lg-12">
             <div class="tab">
                 <ul class="nav nav-tabs" role="tablist">
@@ -319,7 +280,7 @@
                             </div>
                         </form>
                         <button class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Regresar"
-                            (click)="activeOrders()">
+                            (click)="activeIndication()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-skip-back">
@@ -364,7 +325,7 @@
                             </tbody>
                         </table>
                         <button class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Regresar"
-                            (click)="activeOrders()">
+                            (click)="activeIndication()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-skip-back">
@@ -393,7 +354,7 @@
                             </tbody>
                         </table>
                         <button class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Regresar"
-                            (click)="activeOrders()">
+                            (click)="activeIndication()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-skip-back">
@@ -422,7 +383,7 @@
                             </tbody>
                         </table>
                         <button class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Regresar"
-                            (click)="activeOrders()">
+                            (click)="activeIndication()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-skip-back">
@@ -471,7 +432,7 @@
                             </tbody>
                         </table>
                         <button class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Regresar"
-                            (click)="activeOrders()">
+                            (click)="activeIndication()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-skip-back">

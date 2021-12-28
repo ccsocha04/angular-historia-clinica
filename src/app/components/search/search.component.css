@@ -1,0 +1,12 @@
+/* body {
+
+    background-image: url("../../../assets/img/background/background_sign_in_1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+} */
+
+.search {
+  background-image: url(../../../assets/img/background/background_sign_in_1.png);
+  background-size: cover
+}

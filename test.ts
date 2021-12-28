@@ -9,17 +9,22 @@
 6. Filtro individual, no  filtra en conjunto -> OK
 7. Dashboard Ultimo diagnóstico, antecedente, orden y plan de manejo -> OK
 8. Contador y bloqueó de tab's -> OK
-9. Seguridad de páginas guards
-10. Logout
-11. Estilos tab's
+9. Seguridad de páginas guards -> OK -> Bloqueo de estilos y funciones
+10. Logout -> OK
+11. Estilos tab's -> OK
 12. Perfil de usuario
 13. Regresar a la busqueda
-14. Estilo login
-15. Estilo search
+14. Estilo login -> OK
+15. Estilo search -> OK
 16. Pruebas unitarias
 17. Pruebas integración
 
-18. Estilo Boolean
+18. Estilo Boolean -> OK
 19. Tabla Medicamento - Indicación
-20. Format Fecha
+20. Formatear Fecha
+
+Perfil de usuario
+Página no encontrada
+Página de Información aplicación
+
 */

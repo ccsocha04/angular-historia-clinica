@@ -16,9 +16,9 @@ const base_url = environment.base_url;
 })
 export class EncrdecrService {
 
-  constructor( 
+  constructor(
     private http: HttpClient,
-    private userService: UserService ) { }
+    private userService: UserService) { }
 
   set(keys, value) {
     var key = CryptoJS.enc.Utf8.parse(keys);
@@ -54,12 +54,28 @@ export class EncrdecrService {
         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
       })
     };
-    
-    const data = "Parametro=" + encodeURIComponent(param.substring(0, param.length - 1));
+
+    console.log(param.length);
+    console.log(param);
+
+    if (param.slice(-1) == "=") {
+      console.log("Test");
+    }
+
+    let data = "";
+
+    if (param.slice(-1) == "=") {
+      data = "Parametro=" + encodeURIComponent(param);
+      console.log(data);
+    } else {
+      data = "Parametro=" + encodeURIComponent(param.substring(0, param.length - 1));
+      console.log(data);
+    }
+
 
     return this.http.post(`${base_url}/api/Account/ValidarExterno`, data, httpOptions)
       .pipe(
-        tap((resp: any) => { })
+        tap((resp: any) => {})
       );
 
   }

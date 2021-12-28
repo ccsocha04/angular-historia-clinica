@@ -33,7 +33,7 @@ export class HcpacientComponent implements OnInit {
     this.encryptURL = this.encryptURL.replace(/%20/g, '+');
     this.encryptURL = this.encryptURL.replace(/%2F/g, '/');
     this.encryptURL = this.encryptURL.split('?')[1];
-
+    
     this.validateExternal(this.encryptURL);
 
     // var encrypted = this.EncrDecr.set('SYAC!SecretariaSaludCundinamarca', 'Usuario=999&Password=9653256&TipoDocumento=CC&Numero=79582123&Aplicacion=003&Fecha=23/09/2014&Ips=251260035301');
@@ -50,7 +50,7 @@ export class HcpacientComponent implements OnInit {
       .subscribe(resp => {
 
         this.desencryptUser = resp;
-        console.log(this.desencryptUser);
+        // console.log(this.desencryptUser);
 
         const formData = {
           UserName: '',
@@ -61,7 +61,6 @@ export class HcpacientComponent implements OnInit {
 
         this.userService.loginUser(formData)
           .subscribe(resp => {
-
             const recordQuery: any = {
               "Codigo": "GEENPaciente",
               "Valores": [
