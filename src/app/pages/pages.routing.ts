@@ -24,7 +24,7 @@ const routes: Routes = [
             { path: 'FoliosAtencion', component: InvoiceComponent, data: {titulo: 'Folios de atención', descripcion: '' } },
             { path: 'Diagnosticos', component: DiagnosisComponent, data: {titulo: 'Diagnósticos', descripcion: '' } },
             { path: 'Antecedentes', component: BackgroundComponent, data: {titulo: 'Antecedentes', descripcion: '' } },
-            { path: 'Ordenes', component: OrdersComponent, data: {titulo: 'Ordenes', descripcion: '' } },
+            { path: 'Órdenes', component: OrdersComponent, data: {titulo: 'Órdenes', descripcion: '' } },
             { path: 'PlanManejo/Medicamentos', component: ManagementComponent, data: {titulo: 'Medicamentos', descripcion: '' } },
             { path: 'PlanManejo/Indicaciones', component: IndicationComponent, data: {titulo: 'Indicaciones', descripcion: '' } },
             { path: 'HCPaciente.html', component: HcpacientComponent, data: {titulo: 'Integración HIS - Historia Clínica', descripcion: '' } }

@@ -106,9 +106,10 @@ export class ManagementComponent implements AfterViewInit, OnInit {
 
   getDataSource(id: number): ManagementData {
     const management = this.recordPatient.PlanManejo.filter(element => element.TipoPlanManejo.ItemDescr == "Medicamento")[id];
+    const dateManagement = management.FolioAtencion.FechaAtencion.substring(0, 10) + ' - ' + management.FolioAtencion.FechaAtencion.substring(11);
     return {
       CodeManagement: management.Medicamento.Codigo,
-      DateManagement: management.FolioAtencion.FechaAtencion,
+      DateManagement: dateManagement,
       Name: management.Medicamento.Nombre,
       Amount: management.Cantidad,
       Hospital: management.FolioAtencion.IPS.Nombre,

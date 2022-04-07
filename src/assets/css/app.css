@@ -14836,8 +14836,8 @@ body[data-theme=colored] .sidebar-dropdown .sidebar-item.active .sidebar-link,bo
 }
 
 .sidebar-brand {
-    font-weight: 600;
-    font-size: 1.15rem;
+    /* font-weight: 600; */
+    font-size: 1.20rem;
     padding: 1.6rem 1.6rem;
     display: block;
     color: #f8f9fa

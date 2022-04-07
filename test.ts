@@ -13,18 +13,18 @@
 10. Logout -> OK
 11. Estilos tab's -> OK
 12. Perfil de usuario
-13. Regresar a la busqueda
+13. Regresar a la busqueda -> OK
 14. Estilo login -> OK
 15. Estilo search -> OK
 16. Pruebas unitarias
 17. Pruebas integración
 
 18. Estilo Boolean -> OK
-19. Tabla Medicamento - Indicación
-20. Formatear Fecha
+19. Tabla Medicamento - Indicación -> OK
+20. Formatear Fecha -> OK Revisar Pipe's
 
-Perfil de usuario
-Página no encontrada
-Página de Información aplicación
+21. Página no encontrada -> OK
+22. Página de Información aplicación
+23. Refrescar página de inicio al cargar la busqueda.
 
 */

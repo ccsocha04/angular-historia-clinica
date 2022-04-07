@@ -54,28 +54,14 @@ export class EncrdecrService {
         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
       })
     };
-
-    console.log(param.length);
-    console.log(param);
-
-    if (param.slice(-1) == "=") {
-      console.log("Test");
-    }
-
-    let data = "";
-
-    if (param.slice(-1) == "=") {
-      data = "Parametro=" + encodeURIComponent(param);
-      console.log(data);
-    } else {
-      data = "Parametro=" + encodeURIComponent(param.substring(0, param.length - 1));
-      console.log(data);
-    }
-
+    
+    let data = `Parametro=${param}=`;
 
     return this.http.post(`${base_url}/api/Account/ValidarExterno`, data, httpOptions)
       .pipe(
-        tap((resp: any) => {})
+        tap((resp: any) => {
+          console.log(resp);
+        })
       );
 
   }

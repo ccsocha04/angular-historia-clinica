@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router'
 import { FormBuilder, Validators } from '@angular/forms';
 
@@ -17,22 +17,25 @@ import { UserService } from '../../services/user.service';
 })
 export class HcpacientComponent implements OnInit {
 
+  urlTree: object;
   encryptURL: string;
   desencryptUser = [];
 
   constructor(
     private router: Router,
     private encrDecr: EncrdecrService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private ngZone: NgZone) { }
 
   ngOnInit(): void {
-
-    this.encryptURL = this.router.url;
+    
+    this.urlTree = (this.router.parseUrl(this.router.url)).queryParams;
+    this.encryptURL = Object.keys(this.urlTree)[0];
 
     // TODO - Generar una función
-    this.encryptURL = this.encryptURL.replace(/%20/g, '+');
-    this.encryptURL = this.encryptURL.replace(/%2F/g, '/');
-    this.encryptURL = this.encryptURL.split('?')[1];
+    // this.encryptURL = this.encryptURL.replace(/%20/g, '+');
+    // this.encryptURL = this.encryptURL.replace(/%2F/g, '/');
+    // this.encryptURL = this.encryptURL.split('?')[1];
     
     this.validateExternal(this.encryptURL);
 
@@ -50,14 +53,11 @@ export class HcpacientComponent implements OnInit {
       .subscribe(resp => {
 
         this.desencryptUser = resp;
-        // console.log(this.desencryptUser);
 
         const formData = {
-          UserName: '',
-          Password: '',
+          UserName: this.desencryptUser["UserName"],
+          Password: this.desencryptUser['Password']
         };
-        formData['UserName'] = this.desencryptUser["UserName"]
-        formData['Password'] = this.desencryptUser['Password'];
 
         this.userService.loginUser(formData)
           .subscribe(resp => {
@@ -78,8 +78,10 @@ export class HcpacientComponent implements OnInit {
             recordQuery["Valores"][1] = this.desencryptUser["Numero"]
 
             this.userService.searchPatient(recordQuery)
-              .subscribe(resp => {
-                this.router.navigateByUrl('/');
+              .subscribe( resp => {
+                this.ngZone.run(() => {
+                  this.router.navigateByUrl('/HistoriaClinica/DatosPaciente');
+                })
               }, (err) => {
                 Swal.fire('Error', err.error = 'Usuario no registrado - Search', 'error');
               });

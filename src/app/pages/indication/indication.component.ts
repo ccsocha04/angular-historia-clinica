@@ -104,8 +104,9 @@ export class IndicationComponent implements OnInit {
 
   getDataSource(id: number): IndicationData { 
     const indication = this.recordPatient.PlanManejo.filter(element => element.TipoPlanManejo.ItemDescr == "Indicacion")[id];
+    const dateIndication = indication.FolioAtencion.FechaAtencion.substring(0, 10) + ' - ' + indication.FolioAtencion.FechaAtencion.substring(11);
     return {
-      DateIndication: indication.FolioAtencion.FechaAtencion,
+      DateIndication: dateIndication,
       Hospital: indication.FolioAtencion.IPS.Nombre,
       Observations: indication.Observacion,
       State: indication.FolioAtencion.Oid

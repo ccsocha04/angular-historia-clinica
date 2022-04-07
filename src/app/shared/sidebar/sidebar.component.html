@@ -26,25 +26,25 @@
                     <span class="align-middle">Folios de atención</span>
                 </a>
             </li>
-            <li class="sidebar-item" routerLinkActive="active">
+            <li class="sidebar-item" routerLinkActive="active" *ngIf="recordPatient.Diagnosticos.length > 0">
                 <a class="sidebar-link" routerLink="Diagnosticos">
                     <em class="align-middle" data-feather="check-square"></em>
                     <span class="align-middle">Diagnósticos</span>
                 </a>
             </li>
-            <li class="sidebar-item" routerLinkActive="active">
+            <li class="sidebar-item" routerLinkActive="active" *ngIf="recordPatient.Antecedentes.length > 0">
                 <a class="sidebar-link" routerLink="Antecedentes">
                     <em class="align-middle" data-feather="eye"></em>
                     <span class="align-middle">Antecendentes</span>
                 </a>
             </li>
-            <li class="sidebar-item" routerLinkActive="active">
-                <a class="sidebar-link" routerLink="Ordenes">
+            <li class="sidebar-item" routerLinkActive="active" *ngIf="recordPatient.ServiciosIPS.length > 0">
+                <a class="sidebar-link" routerLink="Órdenes">
                     <em class="align-middle" data-feather="clipboard"></em>
-                    <span class="align-middle">Ordenes</span>
+                    <span class="align-middle">Órdenes</span>
                 </a>
             </li>
-            <li class="sidebar-item" routerLinkActive="active" routerLinkActiveOptions="{ exact: true }">
+            <li class="sidebar-item" routerLinkActive="active" routerLinkActiveOptions="{ exact: true }" *ngIf="recordPatient.PlanManejo.length > 0">
                 <a href="#management" data-bs-toggle="collapse" class="sidebar-link collapsed">
                     <em class="align-middle" data-feather="heart"></em> 
                         <span class="align-middle">Plan de manejo</span>
